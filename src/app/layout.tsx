@@ -22,7 +22,7 @@ export default function RootLayout({
         className={`w-full min-h-screen m-0 flex flex-col justify-between text-white`}
       >
         <Navbar />
-        <div className="w-[90%] mx-auto pt-24">
+        <div className="w-[90%] mx-auto pt-24 pb-8">
  {children}
         </div>
        
