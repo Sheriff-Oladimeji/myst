@@ -15,7 +15,7 @@ async function getData() {
 const AllQuotes = async () => {
      const quotes = await  getData()
   return (
-    <section>
+    <section className='grid sm:grid-cols-2 md:grid-cols-3 gap-4 w-full'>
       {quotes.map((item: Quote)  => (
         <QuoteCard key={item._id} author={item.author} quote={item.quote} />
       ))}

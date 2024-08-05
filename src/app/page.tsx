@@ -4,7 +4,7 @@ import AllQuotes from "@/components/AllQuotes";
 
 export default function Home() {
   return (
-    <main className="grid md:grid-cols-3 gap-4">
+    <main >
     
    <AllQuotes/>
     </main>
