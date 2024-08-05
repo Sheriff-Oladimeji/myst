@@ -49,6 +49,7 @@ const Navbar = () => {
                 className={`block p-2 text-gray-100 rounded md:hover:text-blue-700 md:hover:bg-transparent md:p-0  ${
                   path == item.url ? "bg-blue-700 md:bg-transparent" : ""
                 }`}
+                onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.title}
               </Link>
