@@ -4,6 +4,7 @@ import QuoteCard from './QuoteCard'
 
 
 async function getData(): Promise<Quote[]> {
+  "use server";
   const res = await fetch("https://myst-api.onrender.com/api/v1/quotes", {
     cache: "no-cache",
   });
