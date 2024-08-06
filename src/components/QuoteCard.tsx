@@ -6,7 +6,7 @@ import { PiHeartThin } from "react-icons/pi";
 
 const QuoteCard = ({ quote, author, id }: Quote) => {
   return (
-    <div className="max-w-md p-6 border border-gray-500 rounded-xl shadow">
+    <div className="max-w-md  border border-gray-500 rounded-xl shadow  p-6 flex flex-col justify-between">
       <div className="flex flex-col gap-3">
         <p>{quote}</p>
         <p className="text-sm text-blue-700">{author}</p>
