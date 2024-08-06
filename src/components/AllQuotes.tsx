@@ -4,7 +4,7 @@ import QuoteCard from './QuoteCard'
 
 
 async function getData() {
-  const res = await fetch('https://myst-api.onrender.com/api/v1/quotes')
+  const res = await fetch('https://myst-api.onrender.com/api/v1/quotes', {cache: "no-cache"})
   if (!res.ok) {
    
     throw new Error('Failed to fetch data')

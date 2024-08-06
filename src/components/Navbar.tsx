@@ -25,12 +25,14 @@ const Navbar = () => {
           </span>
         </Link>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          <button
-            type="button"
-            className="text-white bg-blue-700  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm px-4 py-2 text-center rounded-[6px] "
-          >
-            Add Quote
-          </button>
+          <Link href="/new-quote">
+            <button
+              type="button"
+              className="text-white bg-blue-700  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm px-4 py-2 text-center rounded-[6px] "
+            >
+              Add Quote
+            </button>
+          </Link>
 
           <button onClick={toggleMobileMenu} className={`block md:hidden`}>
             <IoMenu size={35} />
