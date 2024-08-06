@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Quote } from "@/types/quote";
 import React from "react";
 import { IoMdCopy } from "react-icons/io";
@@ -6,7 +6,7 @@ import { PiHeartThin } from "react-icons/pi";
 
 const QuoteCard = ({ quote, author, _id }: Quote) => {
   return (
-    <div className="max-w-md p-6 bg-white border border-gray-200 rounded-md shadow  ">
+    <div className="max-w-md p-6  border border-gray-500 rounded-xl shadow  ">
       <div className="flex flex-col gap-3">
         <p>{quote}</p>
         <p className="text-sm text-blue-700">{author}</p>
