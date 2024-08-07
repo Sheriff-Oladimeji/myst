@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import { Quote } from "@/types/quote";
 import { IoMdCopy } from "react-icons/io";
 import { PiHeartThin } from "react-icons/pi";
+import Image from "next/image";
 
-const QuoteCard = ({ quote, author, id, upVote }: Quote) => {
+const QuoteCard = ({ quote, author, id, upVote, image }: Quote) => {
   return (
     <div className="max-w-md  border border-gray-600 rounded-xl shadow  p-6 flex flex-col justify-between bg-gray-900">
+      <div>{image && <Image src={image} alt="image" />}</div>
       <div className="flex flex-col  justify-between h-full">
         <p>{quote}</p>
         <p className="text-sm text-main mt-3">{author}</p>

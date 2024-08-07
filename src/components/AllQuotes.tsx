@@ -6,17 +6,18 @@ import Loader from './Loader';
 async function getData(): Promise<Quote[]> {
   "use server";
   const res = await fetch("https://myst-api.onrender.com/api/v1/quotes", {
-    cache: "no-cache",
+    cache: "no-store",
   });
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
   const data = await res.json();
-  return data.map((item: { _id: string; author: string; quote: string , upVote: number}) => ({
+  return data.map((item: { _id: string; author: string; quote: string , upVote: number, image: string}) => ({
     id: item._id,
     author: item.author,
     quote: item.quote,
-    upVote: item.upVote
+    upVote: item.upVote,
+    image: item?.image
   }));
 }
 
@@ -33,6 +34,7 @@ const AllQuotes = async () => {
             author={item.author}
             quote={item.quote}
             upVote={item.upVote}
+            image={item?.image}
           />
         ))}
       </section>

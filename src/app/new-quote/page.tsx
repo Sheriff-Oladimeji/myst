@@ -1,17 +1,56 @@
 "use client";
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useState, ChangeEvent } from "react";
 
 const AddQuote = () => {
   const [quote, setQuote] = useState<string>("");
   const [author, setAuthor] = useState<string>("");
+  const [image, setImage] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
+  const [newCategory, setNewCategory] = useState<string>("");
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const popularCategories = [
+    "Inspirational",
+    "Motivational",
+    "Love",
+    "Life",
+    "Success",
+    "Happiness",
+    "Wisdom",
+    "Friendship",
+  ];
+
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleCategoryChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setCategory(e.target.value);
+    if (e.target.value !== "new") {
+      setNewCategory("");
+    }
+  };
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
     try {
-      const data = { quote, author };
+      const finalCategory = category === "new" ? newCategory : category;
 
+      const data = {
+        quote,
+        author,
+        image,
+        category: finalCategory,
+      };
       const res = await fetch("https://myst-api.onrender.com/api/v1/quotes", {
         method: "POST",
         headers: {
@@ -19,18 +58,17 @@ const AddQuote = () => {
         },
         body: JSON.stringify(data),
       });
-
       if (!res.ok) {
-        const errorText = await res.json();
+        const errorText = await res.text();
         throw new Error(
           `HTTP error! status: ${res.status}, message: ${errorText}`
         );
       }
-
       const responseData = await res.json();
       console.log("Response Data:", responseData);
-      alert("Request successful");
+      alert("Quote added successfully");
     } catch (error: any) {
+      console.error("Error details:", error);
       alert("An error occurred: " + error.message);
     } finally {
       setIsLoading(false);
@@ -50,7 +88,7 @@ const AddQuote = () => {
           type="text"
           name="quote"
           placeholder="Enter quote"
-          className="block w-full p-6 text-gray-900 border border-gray-300  bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 rounded-xl"
+          className="block w-full p-6 text-gray-900 border border-gray-300 bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 rounded-xl"
           value={quote}
           onChange={(e) => setQuote(e.target.value)}
           required
@@ -63,15 +101,72 @@ const AddQuote = () => {
         >
           Quote Author
         </label>
-
         <input
           type="text"
           name="author"
           placeholder="Enter author"
-          className="block w-full p-3 text-gray-900 border border-gray-300  bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 rounded-xl"
+          className="block w-full p-3 text-gray-900 border border-gray-300 bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 rounded-xl"
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
           required
+        />
+      </div>
+      <div>
+        <label
+          htmlFor="category"
+          className="block mb-2 text-sm font-medium text-white"
+        >
+          Category
+        </label>
+        <select
+          name="category"
+          className="block w-full p-3 text-gray-900 border border-gray-300 bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 rounded-xl"
+          value={category}
+          onChange={handleCategoryChange}
+          required
+        >
+          <option value="">Select a category</option>
+          {popularCategories.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
+          <option value="new">Add new category</option>
+        </select>
+      </div>
+      {category === "new" && (
+        <div>
+          <label
+            htmlFor="newCategory"
+            className="block mb-2 text-sm font-medium text-white"
+          >
+            New Category
+          </label>
+          <input
+            type="text"
+            name="newCategory"
+            placeholder="Enter new category"
+            className="block w-full p-3 text-gray-900 border border-gray-300 bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 rounded-xl"
+            value={newCategory}
+            onChange={(e) => setNewCategory(e.target.value)}
+            required
+          />
+        </div>
+      )}
+
+      <div>
+        <label
+          htmlFor="image"
+          className="block mb-2 text-sm font-medium text-white"
+        >
+          Image
+        </label>
+        <input
+          type="file"
+          name="imageFile"
+          accept="image/*"
+          onChange={handleImageChange}
+          className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
         />
       </div>
       <button
