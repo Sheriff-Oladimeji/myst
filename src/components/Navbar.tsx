@@ -14,7 +14,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed w-full z-20 top-0 start-0 border-b border-gray-300 dark:border-gray-600 bg-black">
+    <nav className="fixed w-full z-20 top-0 start-0 border-b border-gray-500 dark:border-gray-600 bg-black">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link
           href="/"
@@ -28,7 +28,7 @@ const Navbar = () => {
           <Link href="/new-quote">
             <button
               type="button"
-              className="text-white bg-blue-700  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm px-4 py-2 text-center rounded-[6px] "
+              className="text-white bg-blue-700  focus:outline-none  font-medium  text-sm px-4 py-2 text-center rounded-[6px] "
             >
               Add Quote
             </button>

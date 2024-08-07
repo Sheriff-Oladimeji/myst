@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Quote } from '@/types/quote'
 import QuoteCard from './QuoteCard'
 import Loader from './Loader';
@@ -12,26 +12,31 @@ async function getData(): Promise<Quote[]> {
     throw new Error("Failed to fetch data");
   }
   const data = await res.json();
-  return data.map((item: { _id: string; author: string; quote: string }) => ({
+  return data.map((item: { _id: string; author: string; quote: string , upVote: number}) => ({
     id: item._id,
     author: item.author,
     quote: item.quote,
+    upVote: item.upVote
   }));
 }
 
 const AllQuotes = async () => {
-     const quotes = await  getData()
+  const quotes = await getData()
+  quotes.reverse()
   return (
-    <section className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-      {quotes.map((item: Quote) => (
-        <QuoteCard
-          key={item.id}
-          id={item.id}
-          author={item.author}
-          quote={item.quote}
-        />
-      ))}
-    </section>
+    <Suspense fallback={<Loader/>}>
+      <section className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {quotes.map((item: Quote) => (
+          <QuoteCard
+            key={item.id}
+            id={item.id}
+            author={item.author}
+            quote={item.quote}
+            upVote={item.upVote}
+          />
+        ))}
+      </section>
+    </Suspense>
   );
 }
 
