@@ -1,7 +1,7 @@
 import React from 'react'
 import { Quote } from '@/types/quote'
 import QuoteCard from './QuoteCard'
-
+import Loader from './Loader';
 
 async function getData(): Promise<Quote[]> {
   "use server";
