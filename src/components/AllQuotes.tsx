@@ -23,7 +23,7 @@ async function getData(): Promise<Quote[]> {
 
 const AllQuotes = async () => {
   const quotes = await getData()
-  quotes.reverse()
+ 
   return (
     <Suspense fallback={<Loader/>}>
       <section className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
