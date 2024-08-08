@@ -12,12 +12,12 @@ async function getData(): Promise<Quote[]> {
     throw new Error("Failed to fetch data");
   }
   const data = await res.json();
-  return data.map((item: { _id: string; author: string; quote: string , upVote: number, image: string}) => ({
+  return data.map((item: { _id: string; author: string; quote: string ,}) => ({
     id: item._id,
     author: item.author,
     quote: item.quote,
-    upVote: item.upVote,
-    image: item?.image
+  
+   
   }));
 }
 
