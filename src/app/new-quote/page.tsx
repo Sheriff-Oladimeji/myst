@@ -148,7 +148,7 @@ const AddQuote = () => {
       <button
         type="submit"
         disabled={isLoading}
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-[7px] text-sm px-5 py-2.5 text-center w-max"
+        className={`text-white ${isLoading? "bg-blue-300":"bg-blue-700"} hover:bg-blue-800 focus:outline-none focus:ring-blue-300 font-medium rounded-[7px] text-sm px-6 py-2.5 text-center w-max `}
       >
         {isLoading ? "Loading..." : "Submit"}
       </button>
