@@ -4,7 +4,7 @@ import React, { FormEvent, useState, ChangeEvent } from "react";
 const AddQuote = () => {
   const [quote, setQuote] = useState<string>("");
   const [author, setAuthor] = useState<string>("");
-  const [image, setImage] = useState<string>("");
+  
   const [category, setCategory] = useState<string>("");
   const [newCategory, setNewCategory] = useState<string>("");
 
@@ -21,16 +21,7 @@ const AddQuote = () => {
     "Friendship",
   ];
 
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+
 
   const handleCategoryChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setCategory(e.target.value);
@@ -48,7 +39,6 @@ const AddQuote = () => {
       const data = {
         quote,
         author,
-        image,
         category: finalCategory,
       };
       const res = await fetch("https://myst-api.onrender.com/api/v1/quotes", {
@@ -154,21 +144,7 @@ const AddQuote = () => {
         </div>
       )}
 
-      <div>
-        <label
-          htmlFor="image"
-          className="block mb-2 text-sm font-medium text-white"
-        >
-          Image
-        </label>
-        <input
-          type="file"
-          name="imageFile"
-          accept="image/*"
-          onChange={handleImageChange}
-          className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
-        />
-      </div>
+    
       <button
         type="submit"
         disabled={isLoading}
