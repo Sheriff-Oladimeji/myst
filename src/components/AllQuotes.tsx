@@ -1,7 +1,7 @@
-import React, { Suspense } from 'react'
-import { Quote } from '@/types/quote'
-import QuoteCard from './QuoteCard'
-import Loader from './Loader';
+import React, { Suspense } from "react";
+import { Quote } from "@/types/quote";
+import QuoteCard from "./QuoteCard";
+import Loader from "./Loader";
 
 async function getData(): Promise<Quote[]> {
   "use server";
@@ -12,34 +12,30 @@ async function getData(): Promise<Quote[]> {
     throw new Error("Failed to fetch data");
   }
   const data = await res.json();
-  return data.map((item: { _id: string; author: string; quote: string ,}) => ({
+  return data.map((item: { _id: string; author: string; quote: string }) => ({
     id: item._id,
     author: item.author,
     quote: item.quote,
-  
-   
   }));
 }
 
 const AllQuotes = async () => {
-  const quotes = await getData()
- 
-  return (
-    <Suspense fallback={<Loader/>}>
-      <section className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {quotes.map((item: Quote) => (
-          <QuoteCard
-            key={item.id}
-            id={item.id}
-            author={item.author}
-            quote={item.quote}
-            upVote={item.upVote}
-            image={item?.image}
-          />
-        ))}
-      </section>
-    </Suspense>
-  );
-}
+  const quotes = await getData();
 
-export default AllQuotes
+  return (
+    <section className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+      {quotes.map((item: Quote) => (
+        <QuoteCard
+          key={item.id}
+          id={item.id}
+          author={item.author}
+          quote={item.quote}
+          upVote={item.upVote}
+          image={item?.image}
+        />
+      ))}
+    </section>
+  );
+};
+
+export default AllQuotes;
