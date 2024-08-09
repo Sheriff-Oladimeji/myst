@@ -29,6 +29,7 @@ const Navbar = () => {
             <button
               type="button"
               className="text-white bg-blue-700  focus:outline-none  font-medium  text-sm px-4 py-2 text-center rounded-[6px] "
+              onClick={() => setIsMobileMenuOpen(false)}
             >
               Add Quote
             </button>
