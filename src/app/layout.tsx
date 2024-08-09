@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const runtime = 'edge' 
@@ -23,10 +22,12 @@ export default function RootLayout({
         className={`w-full min-h-screen m-0 flex flex-col justify-between text-white`}
       >
         <Navbar />
+
         <div className="w-[90%] mx-auto pt-24 pb-8">
- {children}
+         
+          {children}
         </div>
-       
+
         <Footer />
       </body>
     </html>

@@ -1,6 +1,8 @@
 "use client";
 import React, { FormEvent, useState, ChangeEvent } from "react";
+  import { ToastContainer, toast } from "react-toastify";
 
+  import "react-toastify/dist/ReactToastify.css";
 const AddQuote = () => {
   const [quote, setQuote] = useState<string>("");
   const [author, setAuthor] = useState<string>("");
@@ -56,7 +58,7 @@ const AddQuote = () => {
       }
       const responseData = await res.json();
       console.log("Response Data:", responseData);
-      alert("Quote added successfully");
+      toast("Quote added successfully")
     } catch (error: any) {
       console.error("Error details:", error);
       alert("An error occurred: " + error.message);
@@ -152,6 +154,7 @@ const AddQuote = () => {
       >
         {isLoading ? "Loading..." : "Submit"}
       </button>
+      <ToastContainer/>
     </form>
   );
 };

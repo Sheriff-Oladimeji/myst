@@ -1,42 +1,54 @@
-import React, { Suspense } from "react";
+"use client"; // Enable use of useState and other client-side hooks
+
+import React, { Suspense, useState, useEffect } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { Quote } from "@/types/quote";
 import QuoteCard from "./QuoteCard";
 import Loader from "./Loader";
+import { fetchQuotes } from "@/utils/fetchQuotes";
 
-async function getData(): Promise<Quote[]> {
-  "use server";
-  const res = await fetch("https://myst-api.onrender.com/api/v1/quotes", {
-    cache: "no-store",
-  });
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  const data = await res.json();
-  return data.map((item: { _id: string; author: string; quote: string }) => ({
-    id: item._id,
-    author: item.author,
-    quote: item.quote,
-  }));
-}
+const AllQuotes = () => {
+  const [quotes, setQuotes] = useState<Quote[]>([]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
-const AllQuotes = async () => {
-  const quotes = await getData();
+  useEffect(() => {
+    const loadInitialQuotes = async () => {
+      const initialQuotes = await fetchQuotes(1);
+      setQuotes(initialQuotes);
+    };
+    loadInitialQuotes();
+  }, []);
+
+  const fetchMoreQuotes = async () => {
+    const newQuotes = await fetchQuotes(page + 1);
+    setQuotes((prevQuotes) => [...prevQuotes, ...newQuotes]);
+    setPage(page + 1);
+    if (newQuotes.length === 0) {
+      setHasMore(false);
+    }
+  };
 
   return (
-    <section>
-      <Suspense fallback={<Loader />}>
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {quotes.map((item: Quote) => (
-            <QuoteCard
-              key={item.id}
-              id={item.id}
-              author={item.author}
-              quote={item.quote}
-            />
-          ))}
-        </div>
-      </Suspense>
-    </section>
+    <InfiniteScroll
+      dataLength={quotes.length}
+      next={fetchMoreQuotes}
+      hasMore={hasMore}
+      loader={<Loader />}
+      endMessage={<p>No more quotes</p>}
+      style={{ overflow: "visible" }}
+    >
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {quotes.map((item: Quote) => (
+          <QuoteCard
+            key={item.id}
+            id={item.id}
+            author={item.author}
+            quote={item.quote}
+          />
+        ))}
+      </div>
+    </InfiniteScroll>
   );
 };
 
