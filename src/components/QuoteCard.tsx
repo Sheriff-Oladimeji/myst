@@ -1,9 +1,7 @@
 "use client";
-import React, { useState } from "react";
 import { Quote } from "@/types/quote";
 import { IoMdCopy } from "react-icons/io";
 import { toast, ToastContainer } from "react-toastify";
-import { MdOutlineDownload } from "react-icons/md";
 import "react-toastify/dist/ReactToastify.css";
 import { HiDownload } from "react-icons/hi";
 const QuoteCard = ({ quote, author, id }: Quote) => {

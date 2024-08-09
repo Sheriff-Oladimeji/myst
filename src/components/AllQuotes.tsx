@@ -1,5 +1,4 @@
-"use client"; // Enable use of useState and other client-side hooks
-
+"use client"; 
 import React, { Suspense, useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Quote } from "@/types/quote";
