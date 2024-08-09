@@ -23,17 +23,19 @@ const AllQuotes = async () => {
   const quotes = await getData();
 
   return (
-    <section className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-      {quotes.map((item: Quote) => (
-        <QuoteCard
-          key={item.id}
-          id={item.id}
-          author={item.author}
-          quote={item.quote}
-          upVote={item.upVote}
-          image={item?.image}
-        />
-      ))}
+    <section>
+      <Suspense fallback={<Loader />}>
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {quotes.map((item: Quote) => (
+            <QuoteCard
+              key={item.id}
+              id={item.id}
+              author={item.author}
+              quote={item.quote}
+            />
+          ))}
+        </div>
+      </Suspense>
     </section>
   );
 };
