@@ -3,10 +3,13 @@ import React, { useState } from "react";
 import { Quote } from "@/types/quote";
 import { IoMdCopy } from "react-icons/io";
 import { toast, ToastContainer } from "react-toastify";
+import { MdOutlineDownload } from "react-icons/md";
+import "react-toastify/dist/ReactToastify.css";
+import { HiDownload } from "react-icons/hi";
 const QuoteCard = ({ quote, author, id }: Quote) => {
   const handleCopy = (text: string) => {
     navigator.clipboard
-      .writeText(text)
+      .writeText(`❝${text}❞`)
       .then(() => {
         toast("Quote copied to clipboard!");
       })
@@ -22,8 +25,11 @@ const QuoteCard = ({ quote, author, id }: Quote) => {
         <p className="text-sm text-blue-700 mt-3">{author}</p>
       </div>
       <div className="flex justify-between items-center border-t border-gray-200 mt-2 pt-2">
-        <button onClick={() => toast("Here is your toast.")}>
-          <IoMdCopy size={20} />
+        <button>
+          <HiDownload  size={22}/>
+        </button>
+        <button onClick={() => handleCopy(quote)}>
+          <IoMdCopy size={22} />
         </button>
       </div>
       <ToastContainer />
