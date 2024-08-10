@@ -5,10 +5,9 @@ import QOD from "@/components/QOD";
   export const runtime = "edge";
 export default function Home() {
   return (
-    <main >
-    <QOD/>
+    <main className="pt-24 pb-8">
+      <QOD />
       <AllQuotes />
-      
     </main>
   );
 }

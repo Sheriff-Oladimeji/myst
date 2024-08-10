@@ -70,7 +70,10 @@ const AddQuote = () => {
   };
 
   return (
-    <form onSubmit={onSubmit} className="flex flex-col gap-4 max-w-sm mx-auto">
+    <form
+      onSubmit={onSubmit}
+      className="flex flex-col gap-4 max-w-sm mx-auto pt-24 pb-8"
+    >
       <div>
         <label
           htmlFor="quote"
