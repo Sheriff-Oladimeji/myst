@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const AllQuotes = () => {
   const { isLoading, error, data } = useQuery({
-    queryKey: ["quoteData"],
+    queryKey: ["quotes"],
     queryFn: () =>
       fetch(`https://myst-api.onrender.com/api/v1/quotes`, {
         cache: "no-store",
@@ -15,15 +15,18 @@ const AllQuotes = () => {
   if (isLoading) return <Loader />;
   if (error) return "An error has occurred: " + error.message;
   return (
-    <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-      {data.map((item: Quote) => (
-        <QuoteCard
-          key={item.id}
-          id={item.id}
-          author={item.author}
-          quote={item.quote}
-        />
-      ))}
+    <div>
+      <p>All Quotes {data.length}</p>
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {data.map((item: Quote) => (
+          <QuoteCard
+            key={item.id}
+            id={item.id}
+            author={item.author}
+            quote={item.quote}
+          />
+        ))}
+      </div>
     </div>
   );
 };
