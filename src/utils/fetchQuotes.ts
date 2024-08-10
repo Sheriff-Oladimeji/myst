@@ -2,7 +2,7 @@ import { Quote } from "@/types/quote";
 
 export async function fetchQuotes(page: number): Promise<Quote[]> {
   const res = await fetch(
-    `https://myst-api.onrender.com/api/v1/quotes?page=${page}`,
+    `https://myst-api.onrender.com/api/v1/quotes`,
     {
       cache: "no-store",
     }

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import QueryProvider from "@/components/QueryProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const runtime = 'edge' 
@@ -17,20 +18,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`w-full min-h-screen m-0 flex flex-col justify-between text-white`}
-      >
-        <Navbar />
+    <QueryProvider>
+      <html lang="en">
+        <body
+          className={`w-full min-h-screen m-0 flex flex-col justify-between text-white`}
+        >
+          <Navbar />
 
-        <div className="w-[90%] mx-auto pt-24 pb-8">
-         
-          {children}
-        </div>
+          <div className="w-[90%] mx-auto pt-24 pb-8">{children}</div>
 
-        <Footer />
-      </body>
-    </html>
+          <Footer />
+        </body>
+      </html>
+    </QueryProvider>
   );
 }
 ``
