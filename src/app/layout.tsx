@@ -21,7 +21,7 @@ export default function RootLayout({
     <QueryProvider>
       <html lang="en">
         <body
-          className={`w-full min-h-screen m-0 flex flex-col justify-between text-white`}
+          className={`w-full min-h-screen m-0 flex flex-col justify-between text-white bg-black`}
         >
           <Navbar />
 

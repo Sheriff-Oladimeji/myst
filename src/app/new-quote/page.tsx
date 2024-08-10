@@ -1,12 +1,13 @@
 "use client";
 import React, { FormEvent, useState, ChangeEvent } from "react";
-  import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
-  import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css";
+import { Input } from "@/components/ui/input";
 const AddQuote = () => {
   const [quote, setQuote] = useState<string>("");
   const [author, setAuthor] = useState<string>("");
-  
+
   const [category, setCategory] = useState<string>("");
   const [newCategory, setNewCategory] = useState<string>("");
 
@@ -22,8 +23,6 @@ const AddQuote = () => {
     "Wisdom",
     "Friendship",
   ];
-
-
 
   const handleCategoryChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setCategory(e.target.value);
@@ -58,7 +57,10 @@ const AddQuote = () => {
       }
       const responseData = await res.json();
       console.log("Response Data:", responseData);
-      toast("Quote added successfully")
+      toast("Quote added successfully");
+      setQuote("")
+      setAuthor("")
+      setCategory("")
     } catch (error: any) {
       console.error("Error details:", error);
       alert("An error occurred: " + error.message);
@@ -72,19 +74,19 @@ const AddQuote = () => {
       <div>
         <label
           htmlFor="quote"
-          className="block mb-2 text-sm font-medium text-white"
+          className="block mb-2 text-sm font-bold text-white"
         >
           Quote
         </label>
-        <input
-          type="text"
+        <textarea
           name="quote"
+          id=""
           placeholder="Enter quote"
-          className="block w-full p-6 text-gray-900 border border-gray-300 bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 rounded-xl"
+          rows={3}
+          className="block w-full p-3 border border-gray-500 text-base  rounded-[8px] bg-gray-700 placeholder-gray-400 text-white  focus:outline-none "
           value={quote}
           onChange={(e) => setQuote(e.target.value)}
-          required
-        />
+        ></textarea>
       </div>
       <div>
         <label
@@ -97,7 +99,7 @@ const AddQuote = () => {
           type="text"
           name="author"
           placeholder="Enter author"
-          className="block w-full p-3 text-gray-900 border border-gray-300 bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 rounded-xl"
+          className="block w-full p-3  border border-gray-500 text-base  rounded-[8px] bg-gray-700 placeholder-gray-400 text-white  focus:outline-none "
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
           required
@@ -112,7 +114,7 @@ const AddQuote = () => {
         </label>
         <select
           name="category"
-          className="block w-full p-3 text-gray-900 border border-gray-300 bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 rounded-xl"
+          className="block w-full p-3  border border-gray-500 text-base  rounded-[8px] bg-gray-700 placeholder-gray-400 text-white  focus:outline-none "
           value={category}
           onChange={handleCategoryChange}
           required
@@ -145,16 +147,16 @@ const AddQuote = () => {
           />
         </div>
       )}
-
-    
       <button
         type="submit"
         disabled={isLoading}
-        className={`text-white ${isLoading? "bg-blue-300":"bg-blue-700"} hover:bg-blue-800 focus:outline-none focus:ring-blue-300 font-medium rounded-[7px] text-sm px-6 py-2.5 text-center w-max `}
+        className={`text-white ${
+          isLoading ? "bg-gray-500" : ""
+        }focus:outline-none font-medium rounded-[7px] text-sm px-6 py-2.5 text-center w-max  bg-blue-700`}
       >
         {isLoading ? "Loading..." : "Submit"}
       </button>
-      <ToastContainer/>
+      <ToastContainer />
     </form>
   );
 };
