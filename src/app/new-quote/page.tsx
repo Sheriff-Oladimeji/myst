@@ -1,9 +1,8 @@
 "use client";
-import React, { FormEvent, useState, ChangeEvent } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { FormEvent, useState, ChangeEvent } from "react";
+import { Bounce, ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
-import { Input } from "@/components/ui/input";
 const AddQuote = () => {
   const [quote, setQuote] = useState<string>("");
   const [author, setAuthor] = useState<string>("");
@@ -57,7 +56,17 @@ const AddQuote = () => {
       }
       const responseData = await res.json();
       console.log("Response Data:", responseData);
-      toast("Quote added successfully");
+      toast("Quote added successfully", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
       setQuote("")
       setAuthor("")
       setCategory("")
