@@ -3,8 +3,7 @@
 import React, { useState } from "react";
 import {
   QueryClient,
-  QueryClientProvider,
-  useQuery,
+  QueryClientProvider
 } from "@tanstack/react-query";
 
 const QueryProvider = ({ children }: { children: React.ReactNode }) => {
