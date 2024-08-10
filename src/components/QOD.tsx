@@ -14,11 +14,14 @@ const QOD = () => {
       }).then((res) => res.json()),
   });
   
-  if (isLoading) return <Loader />;
+  if (isLoading) return <p>Loading Quote</p>;
   if (error) return "An error has occurred: " + error.message;
   return (
-    <div>
+    <div className="text-center">
+      <p>Quote of the day</p>
       <p>{data.quote}</p>
+      <p>{data.author}</p>
+      <p>{data.category}</p>
     </div>
   );
 };

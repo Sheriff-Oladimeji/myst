@@ -3,7 +3,9 @@ import { FormEvent, useState, ChangeEvent } from "react";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
 const AddQuote = () => {
+  const router = useRouter();
   const [quote, setQuote] = useState<string>("");
   const [author, setAuthor] = useState<string>("");
 
@@ -33,6 +35,7 @@ const AddQuote = () => {
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
+     
     try {
       const finalCategory = category === "new" ? newCategory : category;
 
@@ -70,6 +73,7 @@ const AddQuote = () => {
       setQuote("")
       setAuthor("")
       setCategory("")
+      router.push("/");
     } catch (error: any) {
       console.error("Error details:", error);
       alert("An error occurred: " + error.message);
