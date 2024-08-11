@@ -30,13 +30,13 @@ const QOD = () => {
 
   return (
     <header
-      className="relative h-96 md:h-80 flex items-center justify-center text-center text-white bg-cover bg-center"
+      className="relative h-96 md:h-80 flex items-center justify-center text-center text-white bg-cover bg-center m-0"
       style={{
         backgroundImage:
           'url("https://images.unsplash.com/photo-1611757644023-192a39fc9359?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")',
       }}
     >
-      <div className="bg-black bg-opacity-50 p-6 md:p-4 rounded-lg max-w-2xl">
+      <div className="bg-black bg-opacity-50 p-6 md:p-4 rounded-lg max-w-xl sm:max-w-2xl">
         <h1 className="text-3xl font-bold mb-3">Quote of the Day</h1>
         <p className="text-xl md:text-lg italic mb-4">
           &quot;{data.quote}&quot;
