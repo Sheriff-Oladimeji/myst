@@ -1,24 +1,38 @@
 "use client";
+import { useState } from "react";
 import { Quote } from "@/types/quote";
 import QuoteCard from "./QuoteCard";
 import Loader from "./Loader";
+import Pagination from "./Pagination";
 import { useQuery } from "@tanstack/react-query";
 
 const AllQuotes = () => {
+  const [page, setPage] = useState(1);
+  const limit = 25;
+
   const { isLoading, error, data } = useQuery({
-    queryKey: ["quotes"],
+    queryKey: ["quotes", page],
     queryFn: () =>
-      fetch(`https://myst-api.onrender.com/api/v1/quotes`, {
-        cache: "no-store",
-      }).then((res) => res.json()),
+      fetch(
+        `https://myst-api.onrender.com/api/v1/quotes?page=${page}&limit=${limit}`,
+        {
+          cache: "no-store",
+        }
+      ).then((res) => res.json()),
   });
+
   if (isLoading) return <Loader />;
-  if (error) return "An error has occurred: " + error.message;
+  if (error) return "An error has occurred: " + (error as Error).message;
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
+
   return (
-    <div>
-      <p>All Quotes {data.length}</p>
+    <div className="container mx-auto px-4">
+    
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {data.map((item: Quote) => (
+        {data.posts.map((item: Quote) => (
           <QuoteCard
             key={item.id}
             id={item.id}
@@ -27,6 +41,11 @@ const AllQuotes = () => {
           />
         ))}
       </div>
+      <Pagination
+        currentPage={page}
+        totalPages={data.totalPages}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 };
