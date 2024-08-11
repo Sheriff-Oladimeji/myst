@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState } from "react";
 import { Quote } from "@/types/quote";
 import QuoteCard from "./QuoteCard";
@@ -41,7 +41,13 @@ const AllQuotes = () => {
 
   return (
     <div className="container mx-auto px-4">
-      <h1 className="text-2xl font-bold my-4 text-white">Quotes</h1>
+      <section className="text-center my-8">
+        <h2 className="text-3xl font-semibold text-white">Dive into Wisdom</h2>
+        <p className="text-lg text-gray-400 mt-2">
+          Explore a collection of quotes that inspire, motivate, and enlighten.
+        </p>
+        <div className="border-b border-gray-700 mt-4 mb-8"></div>
+      </section>
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
         {data.posts.map((item: Quote) => (
           <QuoteCard
@@ -49,7 +55,7 @@ const AllQuotes = () => {
             id={item.id}
             author={item.author}
             quote={item.quote}
-            category={item.category} // Pass the category to the QuoteCard
+            category={item.category} 
           />
         ))}
       </div>
