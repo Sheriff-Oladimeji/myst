@@ -35,16 +35,16 @@ const AddQuote = () => {
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
-     
+
     try {
       const finalCategory = category === "new" ? newCategory : category;
-
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
       const data = {
         quote,
         author,
         category: finalCategory,
       };
-      const res = await fetch("https://myst-api.onrender.com/api/v1/quotes", {
+      const res = await fetch(`${baseUrl}/quotes/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -70,9 +70,9 @@ const AddQuote = () => {
         theme: "dark",
         transition: Bounce,
       });
-      setQuote("")
-      setAuthor("")
-      setCategory("")
+      setQuote("");
+      setAuthor("");
+      setCategory("");
       router.push("/");
     } catch (error: any) {
       console.error("Error details:", error);

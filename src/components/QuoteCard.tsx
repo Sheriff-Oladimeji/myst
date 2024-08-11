@@ -5,9 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { MdDownload } from "react-icons/md";
 import { IoCopy } from "react-icons/io5";
 
-
-const QuoteCard = ({ quote, author, id }: Quote) => {
-
+const QuoteCard = ({ quote, author, id, category }: Quote) => {
   const handleCopy = (text: string) => {
     navigator.clipboard
       .writeText(`❝${text}❞`)
@@ -30,25 +28,31 @@ const QuoteCard = ({ quote, author, id }: Quote) => {
   };
 
   return (
-    <div
-      className="max-w-md border border-gray-600 rounded-xl shadow p-6 flex flex-col justify-between bg-gray-900"
-    
-    >
-      <div className="flex flex-col justify-between h-full">
-        <p className="text-lg font-semibold">❝{quote}❞</p>
-        <p className="text-sm text-blue-600 mt-3">{author}</p>
+    <div className="max-w-md border border-gray-700 rounded-lg shadow-lg p-6 flex flex-col justify-between bg-gray-900">
+      <div className="flex flex-col h-full">
+        <div className="flex justify-between items-start">
+          <span className="text-xs font-medium text-gray-400">{category}</span>
+        </div>
+        <div className="flex flex-col justify-between h-full">
+          <p className="mt-2 text-lg font-semibold text-white leading-relaxed">
+            ❝{quote}❞
+          </p>
+          <p className="mt-4 text-sm text-blue-500">{author}</p>
+        </div>
       </div>
-      <div className="flex justify-between items-center border-t border-gray-200 mt-2 pt-2">
-        <button>
+      <div className="flex justify-between items-center border-t border-gray-600 mt-4 pt-4">
+        <button className="text-gray-400 hover:text-white transition">
           <MdDownload size={22} />
         </button>
-        <button onClick={() => handleCopy(quote)}>
+        <button
+          onClick={() => handleCopy(quote)}
+          className="text-gray-400 hover:text-white transition"
+        >
           <IoCopy size={22} />
         </button>
       </div>
       <ToastContainer />
     </div>
-    
   );
 };
 
