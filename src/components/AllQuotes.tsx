@@ -8,17 +8,28 @@ import { useQuery } from "@tanstack/react-query";
 
 const AllQuotes = () => {
   const [page, setPage] = useState(1);
-  const limit = 25;
+  const limit = 30;
+
+  const fetchQuotes = async () => {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    if (!baseUrl) {
+      throw new Error("API base URL is not defined");
+    }
+    const response = await fetch(
+      `${baseUrl}/quotes?page=${page}&limit=${limit}`,
+      {
+        cache: "no-store",
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return response.json();
+  };
 
   const { isLoading, error, data } = useQuery({
     queryKey: ["quotes", page],
-    queryFn: () =>
-      fetch(
-        `https://myst-api.onrender.com/api/v1/quotes?page=${page}&limit=${limit}`,
-        {
-          cache: "no-store",
-        }
-      ).then((res) => res.json()),
+    queryFn: fetchQuotes,
   });
 
   if (isLoading) return <Loader />;
@@ -30,7 +41,9 @@ const AllQuotes = () => {
 
   return (
     <div className="container mx-auto px-4">
-    
+      <h1 className="text-2xl font-bold my-4">
+        All Quotes (Total: {data.totalPosts})
+      </h1>
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
         {data.posts.map((item: Quote) => (
           <QuoteCard
