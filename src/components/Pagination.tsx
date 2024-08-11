@@ -35,12 +35,12 @@ const Pagination: React.FC<PaginationProps> = ({
 
   return (
     <nav className="flex justify-center my-8">
-      <ul className="inline-flex items-center -space-x-px">
+      <ul className="inline-flex items-center space-x-1">
         <li>
           <button
             onClick={() => onPageChange(currentPage - 1)}
             disabled={currentPage === 1}
-            className="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 disabled:bg-gray-200"
+            className="px-3 py-2 text-gray-400 bg-transparent border border-gray-600 rounded-l-lg hover:bg-gray-700 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
           >
             &lt;
           </button>
@@ -48,16 +48,16 @@ const Pagination: React.FC<PaginationProps> = ({
         {getPageNumbers().map((number, index) => (
           <li key={index}>
             {number === "..." ? (
-              <span className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300">
+              <span className="px-3 py-2 text-gray-400 bg-transparent border border-gray-600">
                 ...
               </span>
             ) : (
               <button
                 onClick={() => onPageChange(number as number)}
-                className={`px-3 py-2 leading-tight ${
+                className={`px-3 py-2 rounded-md ${
                   currentPage === number
-                    ? "text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
-                    : "text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                    ? "text-white bg-blue-500 border-blue-500"
+                    : "text-gray-400 bg-transparent border border-gray-600 hover:bg-gray-700 hover:text-white"
                 }`}
               >
                 {number}
@@ -69,7 +69,7 @@ const Pagination: React.FC<PaginationProps> = ({
           <button
             onClick={() => onPageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 disabled:bg-gray-200"
+            className="px-3 py-2 text-gray-400 bg-transparent border border-gray-600 rounded-r-lg hover:bg-gray-700 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
           >
             &gt;
           </button>

@@ -42,7 +42,7 @@ const AllQuotes = () => {
   return (
     <div className="container mx-auto px-4">
       <h1 className="text-2xl font-bold my-4">
-        All Quotes (Total: {data.totalPosts})
+        Quotes
       </h1>
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
         {data.posts.map((item: Quote) => (
