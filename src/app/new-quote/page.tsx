@@ -4,6 +4,21 @@ import { Bounce, ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
+
+const showWarning = (message: string) => {
+return toast.error(message, {
+  position: "top-right",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "light",
+  transition: Bounce,
+});
+}
+
 const AddQuote = () => {
   const router = useRouter();
   const [quote, setQuote] = useState<string>("");
@@ -33,11 +48,15 @@ const AddQuote = () => {
   };
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+   
     event.preventDefault();
+     
     setIsLoading(true);
+    
 
     try {
       const finalCategory = category === "new" ? newCategory : category;
+     
       const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
       const data = {
         quote,
@@ -81,10 +100,24 @@ const AddQuote = () => {
       setIsLoading(false);
     }
   };
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+     if (!quote.trim()) {
+       showWarning("Quote cannot be empty");
+     } else if (!author.trim()) {
+       showWarning("Please add an author");
+     } else if (!category) {
+       showWarning("Please select a category");
+     } else if (category === "new" && !newCategory.trim()) {
+       showWarning("Please enter a new category");
+     } else {
+       onSubmit(e);
+     }
+}
 
   return (
     <form
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
       className="flex flex-col gap-4 max-w-sm mx-auto pt-24 pb-8"
     >
       <div>
@@ -118,7 +151,6 @@ const AddQuote = () => {
           className="block w-full p-3  border border-gray-500 text-base  rounded-[8px] bg-gray-700 placeholder-gray-400 text-white  focus:outline-none "
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
-          required
         />
       </div>
       <div>
@@ -133,7 +165,6 @@ const AddQuote = () => {
           className="block w-full p-3  border border-gray-500 text-base  rounded-[8px] bg-gray-700 placeholder-gray-400 text-white  focus:outline-none "
           value={category}
           onChange={handleCategoryChange}
-          required
         >
           <option value="">Select a category</option>
           {popularCategories.map((cat) => (
@@ -156,22 +187,29 @@ const AddQuote = () => {
             type="text"
             name="newCategory"
             placeholder="Enter new category"
-            className="block w-full p-3 text-gray-900 border border-gray-300 bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 rounded-xl"
+            className="block w-full p-3  border border-gray-500 text-base  rounded-[8px] bg-gray-700 placeholder-gray-400 text-white  focus:outline-none"
             value={newCategory}
             onChange={(e) => setNewCategory(e.target.value)}
-            required
           />
         </div>
       )}
-      <button
-        type="submit"
-        disabled={isLoading}
-        className={`text-white ${
-          isLoading ? "bg-gray-500" : ""
-        }focus:outline-none font-medium rounded-[7px] text-sm px-6 py-2.5 text-center w-max  bg-blue-700`}
-      >
-        {isLoading ? "Loading..." : "Submit"}
-      </button>
+      {isLoading ? (
+        <button
+          type="button"
+          className="bg-indigo-500 font-medium rounded-[7px] text-sm px-4 py-2.5 text-center w-max flex items-center gap-2  "
+          disabled
+        >
+          <div className="border-gray-300 h-6 w-6 animate-spin rounded-full border-4 border-t-blue-600" />
+          Processing...
+        </button>
+      ) : (
+        <button
+          type="submit"
+          className={`text-white focus:outline-none font-medium rounded-[7px] text-sm px-6 py-2.5 text-center w-max  bg-blue-700`}
+        >
+          Submit
+        </button>
+      )}
       <ToastContainer />
     </form>
   );
