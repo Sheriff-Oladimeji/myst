@@ -26,17 +26,19 @@ const QOD = () => {
 
   return (
     <header
-      className="relative h-screen flex items-center justify-center text-center text-white bg-cover bg-center"
+      className="relative h-96 md:h-80 flex items-center justify-center text-center text-white bg-cover bg-center"
       style={{
         backgroundImage:
-          'url("https://images.unsplash.com/photo-1528744598421-b7d6d9bd0b9d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80")',
+          'url("https://images.unsplash.com/photo-1611757644023-192a39fc9359?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")',
       }}
     >
-      <div className="bg-black bg-opacity-50 p-8 rounded-lg max-w-3xl">
-        <h1 className="text-4xl font-bold mb-4">Quote of the Day</h1>
-        <p className="text-2xl italic mb-6">&quot;{data.quote}&quot;</p>
-        <p className="text-xl font-semibold">- {data.author}</p>
-        <p className="text-lg text-gray-400">{data.category}</p>
+      <div className="bg-black bg-opacity-50 p-6 md:p-4 rounded-lg max-w-2xl">
+        <h1 className="text-3xl font-bold mb-3">Quote of the Day</h1>
+        <p className="text-xl md:text-lg italic mb-4">
+          &quot;{data.quote}&quot;
+        </p>
+        <p className="text-lg md:text-md font-semibold">- {data.author}</p>
+        <p className="text-md md:text-sm text-gray-400">{data.category}</p>
       </div>
     </header>
   );
