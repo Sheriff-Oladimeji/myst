@@ -50,11 +50,11 @@ const AllCategories = () => {
 
   return (
     <div>
-      <div className="flex flex-wrap items-center gap-3 w-[95%] mx-auto">
+      <div className="w-[90%] mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 xl:grid-cols-5 ">
         {data?.map((item) => (
           <div
             key={item._id}
-            className="text-sm font-medium me-2 px-2.5 py-0.5 rounded bg-gray-700 text-gray-300"
+            className="text-sm font-medium me-2 px-2.5 text-blue-700"
           >
             <p>
               {item._id}: {item.count}
