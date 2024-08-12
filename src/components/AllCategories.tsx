@@ -1,36 +1,25 @@
 "use client";
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 type Category = {
-  _id: string;
+  _id: string; 
   count: number;
 };
 
 const AllCategories = () => {
-  const [data, setData] = useState<Category[] | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await fetch(
-          "https://qlip-api.onrender.com/api/v1/quotes/categories"
-        );
-        if (!response.ok) {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const { isLoading, error, data } = useQuery<Category[]>({
+    queryKey: ["categories"],
+    queryFn: () =>
+      fetch(`${baseUrl}/quotes/categories`, { cache: "reload" }).then((res) => {
+        if (!res.ok) {
           throw new Error("Network response was not ok");
         }
-        const result = await response.json();
-        setData(result);
-      } catch (err) {
-        setError(err instanceof Error ? err : new Error("An error occurred"));
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchCategories();
-  }, []);
+        return res.json();
+      }),
+  });
 
   if (isLoading) {
     return (
@@ -43,7 +32,7 @@ const AllCategories = () => {
   if (error) {
     return (
       <p className="text-red-500 text-xl">
-        An error has occurred: {error.message}
+        An error has occurred: {(error as Error).message}
       </p>
     );
   }
@@ -51,15 +40,16 @@ const AllCategories = () => {
   return (
     <div>
       <div className="w-[90%] mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 xl:grid-cols-5 ">
-        {data?.map((item) => (
-          <div
-            key={item._id}
+        {data?.map(({ _id: id, count }) => (
+          <Link
+            key={id}
+            href={`/categories/${id}`}
             className="text-sm font-medium me-2 px-2.5 text-blue-700"
           >
             <p>
-              {item._id}: {item.count}
+              {id}: {count}
             </p>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
