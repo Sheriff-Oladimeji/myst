@@ -50,7 +50,7 @@ const Navbar = () => {
                 key={item.id}
                 href={item.url}
                 className={`block p-2 text-gray-100 rounded md:hover:text-blue-700 md:hover:bg-transparent md:p-0  ${
-                  path == item.url ? "bg-blue-700 md:bg-transparent" : ""
+                  path == item.url ? "bg-blue-700 md:bg-transparent md:text-blue-700" : ""
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
