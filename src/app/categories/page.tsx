@@ -3,12 +3,12 @@ import React from "react";
 
 const Categories = () => {
   return (
-    <main>
+    <main >
       <section className="text-center">
-        <h2 className="text-2xl font-semibold text-white">
+        <h2 className="text-xl font-semibold text-white">
           Discover All Quote Categories
         </h2>
-        <p className="text-lg text-gray-400 mb-2">
+        <p className="text-base text-gray-400 mb-2">
           Dive into a curated selection of quotes that uplift, inspire, and
           empower.
         </p>

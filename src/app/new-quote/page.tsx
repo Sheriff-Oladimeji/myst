@@ -118,7 +118,7 @@ const AddQuote = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-4 max-w-sm mx-auto pt-24 pb-8"
+      className="flex flex-col gap-4 max-w-sm mx-auto pt-12 pb-8 w-[90%] "
     >
       <div>
         <label

@@ -38,8 +38,8 @@ const AllCategories = () => {
   }
 
   return (
-    <div>
-      <div className="w-[90%] mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 xl:grid-cols-5 ">
+    <div className="w-[90%] mx-auto ">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 xl:grid-cols-5 ">
         {data?.map(({ _id: id, count }) => (
           <Link
             key={id}
