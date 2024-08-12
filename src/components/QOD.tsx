@@ -16,11 +16,12 @@ const QOD = () => {
       }),
   });
 
-  if (isLoading) return (
-    <p className="text-white text-lg flex items-center justify-center text-center">
-      Loading Quote...
-    </p>
-  );
+  if (isLoading)
+    return (
+      <p className="text-white text-lg flex items-center justify-center text-center">
+        Loading Quote...
+      </p>
+    );
   if (error)
     return (
       <p className="text-red-500 text-xl">

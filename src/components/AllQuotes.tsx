@@ -18,7 +18,7 @@ const AllQuotes = () => {
     const response = await fetch(
       `${baseUrl}/quotes?page=${page}&limit=${limit}`,
       {
-        cache: "no-store",
+        cache: "reload",
       }
     );
     if (!response.ok) {
@@ -33,7 +33,12 @@ const AllQuotes = () => {
   });
 
   if (isLoading) return <Loader />;
-  if (error) return "An error has occurred: " + (error as Error).message;
+  if (error)
+    return (
+      <p className="text-red-500 text-xl">
+        An error has occurred: {error.message}
+      </p>
+    );
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);

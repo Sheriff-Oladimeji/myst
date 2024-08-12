@@ -1,9 +1,10 @@
 import React from 'react';
+import Categories from '../categories/page';
 
 const PopularPage = () => {
   return (
     <div>
-      Popular Page
+    
     </div>
   );
 };
