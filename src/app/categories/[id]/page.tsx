@@ -3,14 +3,18 @@ import QuoteCard from "@/components/QuoteCard";
 import { useQuery } from "@tanstack/react-query";
 import { Quote } from "@/types/quote";
 import Loader from "@/components/Loader";
+import { useState } from "react";
+import Pagination from "@/components/Pagination";
 const Category = ({ params }: { params: { id: string } }) => {
+  const [page, setPage] = useState(1);
+  const limit = 30;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   const { isLoading, error, data } = useQuery({
     queryKey: ["category", params.id],
     queryFn: async () => {
       const response = await fetch(
-        `${baseUrl}/quotes/categories/${params.id}`,
+        `${baseUrl}/quotes/categories/${params.id}?page=${page}&limit=${limit}`,
         { cache: "reload" }
       );
       if (!response.ok) {
@@ -40,7 +44,9 @@ const Category = ({ params }: { params: { id: string } }) => {
 
   
   console.log("Received data:", data);
-
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
   return (
     <main className="w-[90%] mx-auto">
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -54,6 +60,11 @@ const Category = ({ params }: { params: { id: string } }) => {
           />
         ))}
       </div>
+      <Pagination
+        currentPage={page}
+        totalPages={data.totalPages}
+        onPageChange={handlePageChange}
+      />
     </main>
   );
 };
