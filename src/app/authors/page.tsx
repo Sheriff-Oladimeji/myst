@@ -1,7 +1,7 @@
 import React from 'react';
 import Categories from '../categories/page';
 
-const PopularPage = () => {
+const AuthorsPage = () => {
   return (
     <div>
     
@@ -9,4 +9,4 @@ const PopularPage = () => {
   );
 };
 
-export default PopularPage;
+export default AuthorsPage;

@@ -27,8 +27,8 @@ const navItems: NavLink[] = [
 
   {
     id: 3,
-    title: "Popular",
-    url: "/popular",
+    title: "Authors",
+    url: "/authors",
   },
 ];
 
