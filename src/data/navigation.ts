@@ -1,4 +1,4 @@
-import { FaXTwitter, FaGithub, FaInstagram } from "react-icons/fa6";
+import { FaXTwitter, FaGithub, FaLinkedinIn } from "react-icons/fa6";
 import { IconType } from "react-icons";
 
 interface NavLink {
@@ -35,18 +35,18 @@ const navItems: NavLink[] = [
 const footerItems: Footer[] = [
   {
     id: 1,
-    url: "https://twitter.com",
+    url: "https://x.com/dimeji_dev",
     icon: FaXTwitter,
   },
   {
     id: 2,
-    url: "https://github.com",
+    url: "https://github.com/Sheriff-Oladimeji",
     icon: FaGithub,
   },
   {
     id: 3,
-    url: "https://instagram.com",
-    icon: FaInstagram,
+    url: "https://www.linkedin.com/in/sheriff-oladimeji-022362255/",
+    icon: FaLinkedinIn,
   },
 ];
 

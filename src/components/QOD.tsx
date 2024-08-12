@@ -17,7 +17,7 @@ const QOD = () => {
   });
 
   if (isLoading) return (
-    <p className="text-white text-2xl flex items-center justify-center text-center">
+    <p className="text-white text-lg flex items-center justify-center text-center">
       Loading Quote...
     </p>
   );

@@ -49,7 +49,7 @@ const AllQuotes = () => {
         <div className="border-b border-gray-700 mt-4 mb-8"></div>
       </section>
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {data.posts.map((item: Quote) => (
+        {data?.posts?.map((item: Quote) => (
           <QuoteCard
             key={item.id}
             id={item.id}
