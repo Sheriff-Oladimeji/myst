@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import QueryProvider from "@/components/QueryProvider";
+import { Analytics } from "@vercel/analytics/react";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const runtime = 'edge' 
@@ -25,9 +27,10 @@ export default function RootLayout({
         >
           <Navbar />
 
-          <div  className="pt-20 pb-8">{children}</div>
+          <div className="pt-20 pb-8">{children}</div>
 
           <Footer />
+          <Analytics />
         </body>
       </html>
     </QueryProvider>
