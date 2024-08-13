@@ -11,7 +11,7 @@ const Category = ({ params }: { params: { id: string } }) => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   const { isLoading, error, data } = useQuery({
-    queryKey: ["category", params.id],
+    queryKey: ["category", params.id, page],
     queryFn: async () => {
       const response = await fetch(
         `${baseUrl}/quotes/categories/${params.id}?page=${page}&limit=${limit}`,
