@@ -37,7 +37,7 @@ const QOD = () => {
           'url("https://images.unsplash.com/photo-1611757644023-192a39fc9359?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")',
       }}
     >
-      <div className="bg-black bg-opacity-50 p-6 md:p-4  h-full w-full">
+      <div className="bg-black bg-opacity-40 p-6 md:p-4  h-full w-full">
         <div className="max-w-xl sm:max-w-2xl flex flex-col justify-center items-center h-full text-center mx-auto">
           <h1 className="text-3xl font-bold mb-3">Quote of the Day</h1>
           <p className="text-xl md:text-lg italic mb-4">
