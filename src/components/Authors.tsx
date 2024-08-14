@@ -42,7 +42,7 @@ const  Authors = () => {
         {data?.map(({ _id: id, count }) => (
           <Link
             key={id}
-            href={`/authors/${id}`}
+            href={`/authors/${encodeURIComponent(id)}`}
             className="text-sm font-medium me-2 px-2.5 text-blue-700"
           >
             <p>

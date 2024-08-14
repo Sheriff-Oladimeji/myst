@@ -8,6 +8,7 @@ import { useState } from "react";
 import Pagination from "@/components/Pagination";
 
 const AuthorQuotes = ({ params }: { params: { id: string } }) => {
+    const decodedAuthor = decodeURIComponent(params.id);
   const [page, setPage] = useState(1);
   const limit = 30;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
@@ -16,8 +17,9 @@ const AuthorQuotes = ({ params }: { params: { id: string } }) => {
     queryKey: ["author", params.id, page],
     queryFn: async () => {
       const response = await fetch(
-        `${baseUrl}/quotes/authors/${params.id}?page=${page}&limit=${limit}`
-       
+        `${baseUrl}/quotes/authors/${encodeURIComponent(
+          decodedAuthor
+        )}?page=${page}&limit=${limit}`
       );
       if (!response.ok) {
         const errorText = await response.text();
@@ -50,16 +52,14 @@ const AuthorQuotes = ({ params }: { params: { id: string } }) => {
     <main className="w-[90%] mx-auto py-8 text-white">
       <header className="text-center mb-8">
         <h1 className="text-3xl md:text-4xl font-bold capitalize">
-          {params.id} Quotes
+          {decodedAuthor} Quotes
         </h1>
         <p className="mt-4 text-lg text-gray-400">
-          Dive into a curated collection of  quotes by {params.id}
-         
+          Dive into a curated collection of quotes by {decodedAuthor}
         </p>
         <div className="border-b border-gray-700 mt-6 mb-8"></div>
       </header>
 
-    
       <section className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
         {data?.posts?.map((item: Quote) => (
           <QuoteCard
@@ -77,8 +77,6 @@ const AuthorQuotes = ({ params }: { params: { id: string } }) => {
         totalPages={data.totalPages}
         onPageChange={handlePageChange}
       />
-
-    
     </main>
   );
 };
