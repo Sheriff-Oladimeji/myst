@@ -28,13 +28,13 @@ const QuoteCard = ({ quote, author, id, category }: Quote) => {
   };
 
   return (
-    <div className="max-w-md border border-gray-700 rounded-lg shadow-lg p-6 flex flex-col justify-between bg-gray-900">
+    <div className="mb-4 border border-gray-700 rounded-lg shadow-lg p-6 flex flex-col justify-between bg-gray-900">
       <div className="flex flex-col h-full">
         <div className="flex justify-between items-start">
           <span className="text-xs font-medium text-gray-400">{category}</span>
         </div>
         <div className="flex flex-col justify-between h-full">
-          <p className="mt-2 text-lg font-semibold text-white leading-relaxed">
+          <p className="mt-2 text-base font-semibold text-white leading-relaxed">
             ❝{quote}❞
           </p>
           <p className="mt-4 text-sm text-blue-500">{author}</p>

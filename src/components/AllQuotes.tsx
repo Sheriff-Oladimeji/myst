@@ -5,7 +5,8 @@ import QuoteCard from "./QuoteCard";
 import Loader from "./Loader";
 import Pagination from "./Pagination";
 import { useQuery } from "@tanstack/react-query";
-
+import Masonry from "react-masonry-css";
+import CardContainer from "./CardContainer";
 const AllQuotes = () => {
   const [page, setPage] = useState(1);
   const limit = 30;
@@ -41,6 +42,8 @@ const AllQuotes = () => {
     setPage(newPage);
   };
 
+  
+
   return (
     <div className="container mx-auto px-4">
       <section className="text-center my-8">
@@ -50,17 +53,19 @@ const AllQuotes = () => {
         </p>
         <div className="border-b border-gray-700 mt-4 mb-8"></div>
       </section>
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+
+      <CardContainer>
         {data?.posts?.map((item: Quote) => (
           <QuoteCard
             key={item.id}
             id={item.id}
             author={item.author}
             quote={item.quote}
-            category={item.category} 
+            category={item.category}
           />
         ))}
-      </div>
+      </CardContainer>
+
       <Pagination
         currentPage={page}
         totalPages={data.totalPages}
