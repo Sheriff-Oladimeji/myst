@@ -4,17 +4,17 @@ import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "./Loader";
 
-type Category = {
-  _id: string; 
+type Author = {
+  _id: string;
   count: number;
 };
 
-const AllCategories = () => {
+const  Authors = () => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-  const { isLoading, error, data } = useQuery<Category[]>({
-    queryKey: ["categories"],
+  const { isLoading, error, data } = useQuery<Author[]>({
+    queryKey: ["authors"],
     queryFn: () =>
-      fetch(`${baseUrl}/quotes/categories`).then((res) => {
+      fetch(`${baseUrl}/quotes/authors`).then((res) => {
         if (!res.ok) {
           throw new Error("Network response was not ok");
         }
@@ -24,7 +24,7 @@ const AllCategories = () => {
 
   if (isLoading) {
     return (
-    <Loader/>
+     <Loader/>
     );
   }
 
@@ -42,7 +42,7 @@ const AllCategories = () => {
         {data?.map(({ _id: id, count }) => (
           <Link
             key={id}
-            href={`/categories/${id}`}
+            href={`/authors/${id}`}
             className="text-sm font-medium me-2 px-2.5 text-blue-700"
           >
             <p>
@@ -55,4 +55,4 @@ const AllCategories = () => {
   );
 };
 
-export default AllCategories;
+export default Authors;
