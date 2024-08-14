@@ -6,9 +6,7 @@ const QOD = () => {
   const { isLoading, error, data } = useQuery({
     queryKey: ["qod"],
     queryFn: () =>
-      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/quotes/qod`, {
-        cache: "no-store",
-      }).then((res) => {
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/quotes/qod`).then((res) => {
         if (!res.ok) {
           throw new Error("Network response was not ok");
         }

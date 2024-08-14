@@ -16,10 +16,7 @@ const AllQuotes = () => {
       throw new Error("API base URL is not defined");
     }
     const response = await fetch(
-      `${baseUrl}/quotes?page=${page}&limit=${limit}`,
-      {
-        cache: "reload",
-      }
+      `${baseUrl}/quotes?page=${page}&limit=${limit}`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");

@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import Loader from "./Loader";
 
 type Category = {
   _id: string; 
@@ -13,7 +13,7 @@ const AllCategories = () => {
   const { isLoading, error, data } = useQuery<Category[]>({
     queryKey: ["categories"],
     queryFn: () =>
-      fetch(`${baseUrl}/quotes/categories`, { cache: "reload" }).then((res) => {
+      fetch(`${baseUrl}/quotes/categories`).then((res) => {
         if (!res.ok) {
           throw new Error("Network response was not ok");
         }
@@ -23,9 +23,7 @@ const AllCategories = () => {
 
   if (isLoading) {
     return (
-      <p className="text-white text-lg flex items-center justify-center text-center">
-        Loading categories...
-      </p>
+    <Loader/>
     );
   }
 
