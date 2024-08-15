@@ -10,6 +10,7 @@ import { useRef } from "react";
 
 const QuoteCard = ({ quote, author, id, category }: Quote) => {
   const cardRef = useRef<HTMLDivElement>(null);
+  const buttonsRef = useRef<HTMLDivElement>(null);
 
   const handleCopy = (text: string) => {
     navigator.clipboard
@@ -32,30 +33,37 @@ const QuoteCard = ({ quote, author, id, category }: Quote) => {
       });
   };
 
-const handleDownload = async () => {
-  if (!cardRef.current) return;
+  const handleDownload = async () => {
+    if (!cardRef.current || !buttonsRef.current) return;
 
-  try {
-    const canvas = await html2canvas(cardRef.current);
-    const dataUrl = canvas.toDataURL("image/png");
-    const link = document.createElement("a");
+    // Hide the buttons
+    buttonsRef.current.style.display = "none";
 
-    const fileName = id
-      ? `quote-${id}.png`
-      : `quote-${new Date().getTime()}.png`; // Fallback to timestamp if id is undefined
+    try {
+      // Capture the screenshot
+      const canvas = await html2canvas(cardRef.current);
+      const dataUrl = canvas.toDataURL("image/png");
+      const link = document.createElement("a");
 
-    link.href = dataUrl;
-    link.download = fileName;
-    link.click();
-  } catch (error) {
-    console.error("Failed to download the quote image: ", error);
-  }
-};
+      const fileName = id
+        ? `quote-${id}.png`
+        : `quote-${new Date().getTime()}.png`; // Fallback to timestamp if id is undefined
+
+      link.href = dataUrl;
+      link.download = fileName;
+      link.click();
+    } catch (error) {
+      console.error("Failed to download the quote image: ", error);
+    } finally {
+      // Show the buttons again after the screenshot is taken
+      buttonsRef.current.style.display = "flex";
+    }
+  };
 
   return (
     <div
       ref={cardRef}
-      className="mb-4 border border-gray-700  shadow-lg p-6 flex flex-col justify-between bg-gray-900"
+      className="mb-4 border border-gray-700 shadow-lg p-6 flex flex-col justify-between bg-gray-900"
     >
       <div className="flex flex-col h-full">
         <div className="flex justify-between items-start">
@@ -68,7 +76,10 @@ const handleDownload = async () => {
           <p className="mt-4 text-sm text-blue-500">{author}</p>
         </div>
       </div>
-      <div className="flex justify-between items-center border-t border-gray-600 mt-4 pt-4">
+      <div
+        ref={buttonsRef}
+        className="flex justify-between items-center border-t border-gray-600 mt-4 pt-4"
+      >
         <button
           onClick={handleDownload}
           className="text-gray-400 hover:text-white transition"
