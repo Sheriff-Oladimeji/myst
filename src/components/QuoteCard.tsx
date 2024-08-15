@@ -12,7 +12,7 @@ import { IoShareSocial } from "react-icons/io5";
 const QuoteCard = ({ quote, author, id, category }: Quote) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
-
+    
   const handleCopy = (text: string) => {
     navigator.clipboard
       .writeText(`❝${text}❞`)
@@ -65,25 +65,24 @@ const QuoteCard = ({ quote, author, id, category }: Quote) => {
       const shareData = {
         title: "Check out this quote",
         text: `"${quote}" - ${author}`,
-        url: window.location.href, // You might want to use a more specific URL if available
+        url: window.location.href, 
       };
 
       if (navigator.share) {
         try {
           await navigator.share(shareData);
           toast("Quote shared successfully!", {
-            // ... (same toast options as in handleCopy)
+            
           });
         } catch (err) {
           console.error("Error sharing:", err);
           toast("Failed to share quote. Try copying instead.", {
-            // ... (same toast options, but with "error" theme)
+            
             theme: "dark",
           });
         }
       } else {
-        // Fallback for browsers that don't support navigator.share
-        handleCopy(`"${quote}" - ${author}`);
+      toast("Sharing is not supported on desktop")
       }
     };
   return (
