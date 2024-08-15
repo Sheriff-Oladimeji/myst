@@ -7,6 +7,7 @@ import { MdDownload } from "react-icons/md";
 import { IoCopy } from "react-icons/io5";
 import html2canvas from "html2canvas";
 import { useRef } from "react";
+import { IoShareSocial } from "react-icons/io5";
 
 const QuoteCard = ({ quote, author, id, category }: Quote) => {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -36,18 +37,18 @@ const QuoteCard = ({ quote, author, id, category }: Quote) => {
   const handleDownload = async () => {
     if (!cardRef.current || !buttonsRef.current) return;
 
-    // Hide the buttons
+    
     buttonsRef.current.style.display = "none";
 
     try {
-      // Capture the screenshot
+      
       const canvas = await html2canvas(cardRef.current);
       const dataUrl = canvas.toDataURL("image/png");
       const link = document.createElement("a");
 
       const fileName = id
         ? `quote-${id}.png`
-        : `quote-${new Date().getTime()}.png`; // Fallback to timestamp if id is undefined
+        : `quote-${new Date().getTime()}.png`; 
 
       link.href = dataUrl;
       link.download = fileName;
@@ -55,11 +56,36 @@ const QuoteCard = ({ quote, author, id, category }: Quote) => {
     } catch (error) {
       console.error("Failed to download the quote image: ", error);
     } finally {
-      // Show the buttons again after the screenshot is taken
+      
       buttonsRef.current.style.display = "flex";
     }
   };
 
+    const handleShare = async () => {
+      const shareData = {
+        title: "Check out this quote",
+        text: `"${quote}" - ${author}`,
+        url: window.location.href, // You might want to use a more specific URL if available
+      };
+
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+          toast("Quote shared successfully!", {
+            // ... (same toast options as in handleCopy)
+          });
+        } catch (err) {
+          console.error("Error sharing:", err);
+          toast("Failed to share quote. Try copying instead.", {
+            // ... (same toast options, but with "error" theme)
+            theme: "dark",
+          });
+        }
+      } else {
+        // Fallback for browsers that don't support navigator.share
+        handleCopy(`"${quote}" - ${author}`);
+      }
+    };
   return (
     <div
       ref={cardRef}
@@ -91,6 +117,12 @@ const QuoteCard = ({ quote, author, id, category }: Quote) => {
           className="text-gray-400 hover:text-white transition"
         >
           <IoCopy size={22} />
+        </button>
+        <button
+          onClick={handleShare}
+          className="text-gray-400 hover:text-white transition"
+        >
+          <IoShareSocial size={22} />
         </button>
       </div>
       <ToastContainer />
