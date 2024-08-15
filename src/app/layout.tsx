@@ -11,7 +11,8 @@ const inter = Inter({ subsets: ["latin"] });
 export const runtime = 'edge' 
 export const metadata: Metadata = {
   title: "Qlip",
-  description: "Online Quotes Archive",
+  description:
+    "Qlip is an online quotes archive = Discover, share, and create inspiring quotes with ease.",
 };
 
 export default function RootLayout({

@@ -6,27 +6,49 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 
 const showWarning = (message: string) => {
-return toast.error(message, {
-  position: "top-right",
-  autoClose: 5000,
-  hideProgressBar: false,
-  closeOnClick: true,
-  pauseOnHover: true,
-  draggable: true,
-  progress: undefined,
-  theme: "light",
-  transition: Bounce,
-});
-}
+  return toast.error(message, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    transition: Bounce,
+  });
+};
+
+const prohibitedWords = [
+  "dick",
+  "gay",
+  "shit",
+  "fuck",
+  "bitch",
+  "asshole",
+  "bastard",
+  "cunt",
+  "slut",
+  "faggot",
+  "nigger",
+  "whore",
+  "pussy",
+  "cock",
+  "damn",
+  "crap",
+  "douchebag",
+  "motherfucker",
+  "retard",
+  "twat",
+  "wanker",
+];
 
 const AddQuote = () => {
   const router = useRouter();
   const [quote, setQuote] = useState<string>("");
   const [author, setAuthor] = useState<string>("");
-
   const [category, setCategory] = useState<string>("");
   const [newCategory, setNewCategory] = useState<string>("");
-
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const popularCategories = [
@@ -47,22 +69,24 @@ const AddQuote = () => {
     }
   };
 
+  const containsProhibitedWords = (text: string) => {
+    const lowerCaseText = text.toLowerCase();
+    return prohibitedWords.some((word) => lowerCaseText.includes(word));
+  };
+
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
-   
     event.preventDefault();
-     
     setIsLoading(true);
-    
 
     try {
       const finalCategory = category === "new" ? newCategory : category;
-     
       const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
       const data = {
         quote,
         author,
         category: finalCategory,
       };
+
       const res = await fetch(`${baseUrl}/quotes/`, {
         method: "POST",
         headers: {
@@ -70,14 +94,17 @@ const AddQuote = () => {
         },
         body: JSON.stringify(data),
       });
+
       if (!res.ok) {
         const errorText = await res.text();
         throw new Error(
           `HTTP error! status: ${res.status}, message: ${errorText}`
         );
       }
+
       const responseData = await res.json();
       console.log("Response Data:", responseData);
+
       toast("Quote added successfully", {
         position: "top-right",
         autoClose: 5000,
@@ -89,6 +116,7 @@ const AddQuote = () => {
         theme: "dark",
         transition: Bounce,
       });
+
       setQuote("");
       setAuthor("");
       setCategory("");
@@ -100,20 +128,23 @@ const AddQuote = () => {
       setIsLoading(false);
     }
   };
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-     if (!quote.trim()) {
-       showWarning("Quote cannot be empty");
-     } else if (!author.trim()) {
-       showWarning("Please add an author");
-     } else if (!category) {
-       showWarning("Please select a category");
-     } else if (category === "new" && !newCategory.trim()) {
-       showWarning("Please enter a new category");
-     } else {
-       onSubmit(e);
-     }
-}
+    e.preventDefault();
+    if (!quote.trim()) {
+      showWarning("Quote cannot be empty");
+    } else if (containsProhibitedWords(quote)) {
+      showWarning("Please remove inappropriate language from the quote");
+    } else if (!author.trim()) {
+      showWarning("Please add an author");
+    } else if (!category) {
+      showWarning("Please select a category");
+    } else if (category === "new" && !newCategory.trim()) {
+      showWarning("Please enter a new category");
+    } else {
+      onSubmit(e);
+    }
+  };
 
   return (
     <form
