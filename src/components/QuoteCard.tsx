@@ -55,7 +55,7 @@ const handleDownload = async () => {
   return (
     <div
       ref={cardRef}
-      className="mb-4 border border-gray-700 rounded-lg shadow-lg p-6 flex flex-col justify-between bg-gray-900"
+      className="mb-4 border border-gray-700  shadow-lg p-6 flex flex-col justify-between bg-gray-900"
     >
       <div className="flex flex-col h-full">
         <div className="flex justify-between items-start">

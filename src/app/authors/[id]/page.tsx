@@ -6,6 +6,7 @@ import { Quote } from "@/types/quote";
 import Loader from "@/components/Loader";
 import { useState } from "react";
 import Pagination from "@/components/Pagination";
+import CardContainer from "@/components/CardContainer";
 
 const AuthorQuotes = ({ params }: { params: { id: string } }) => {
     const decodedAuthor = decodeURIComponent(params.id);
@@ -60,7 +61,7 @@ const AuthorQuotes = ({ params }: { params: { id: string } }) => {
         <div className="border-b border-gray-700 mt-6 mb-8"></div>
       </header>
 
-      <section className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <CardContainer>
         {data?.posts?.map((item: Quote) => (
           <QuoteCard
             key={item.id}
@@ -70,7 +71,7 @@ const AuthorQuotes = ({ params }: { params: { id: string } }) => {
             category={item.category}
           />
         ))}
-      </section>
+      </CardContainer>
 
       <Pagination
         currentPage={page}
