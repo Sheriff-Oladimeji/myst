@@ -43,7 +43,7 @@ const  Authors = () => {
           <Link
             key={id}
             href={`/authors/${encodeURIComponent(id)}`}
-            className="text-sm font-medium me-2 px-2.5 text-blue-700"
+            className="text-sm font-medium me-2  text-blue-700 capitalize"
           >
             <p>
               {id}: {count}
