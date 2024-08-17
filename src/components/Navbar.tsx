@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { IoMenu } from "react-icons/io5";
+import { IoMenu, IoSearch } from "react-icons/io5";
 import { usePathname } from "next/navigation";
 import { navItems } from "@/data/navigation";
 
@@ -24,39 +24,71 @@ const Navbar = () => {
             Qlip
           </span>
         </Link>
-        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        <div className="flex md:order-2 space-x-3 rtl:space-x-reverse">
+          
+          <div className="hidden md:flex items-center space-x-3 rtl:space-x-reverse">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="px-4 py-2 w-64 bg-gray-700 text-white rounded-md focus:outline-none"
+            />
+            <button className="text-white">
+              <IoSearch size={25} />
+            </button>
+          </div>
+
+        
           <Link href="/new-quote">
             <button
               type="button"
-              className="text-white bg-blue-700  focus:outline-none  font-medium  text-sm px-4 py-2 text-center rounded-[6px] "
+              className="ml-3 text-white bg-blue-700 focus:outline-none font-medium text-sm px-4 py-2 text-center rounded-[6px]"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Add Quote
             </button>
           </Link>
 
-          <button onClick={toggleMobileMenu} className={`block md:hidden`}>
+          
+          <button onClick={toggleMobileMenu} className="block md:hidden">
             <IoMenu size={35} />
           </button>
         </div>
+
+      
         <div
           className={`items-center justify-between w-full md:flex md:w-auto md:order-1 ${
             isMobileMenuOpen ? "block" : "hidden"
           }`}
         >
-          <ul className="flex flex-col  md:p-0 mt-4 font-medium  rounded-lg gap-4  md:gap-8 rtl:space-x-reverse md:flex-row md:mt-0  bg-black">
+          <ul className="flex flex-col md:p-0 mt-4 font-medium rounded-lg gap-4 md:gap-8 rtl:space-x-reverse md:flex-row md:mt-0 bg-black">
             {navItems.map((item) => (
               <Link
                 key={item.id}
                 href={item.url}
-                className={`block p-2 text-gray-100 rounded md:hover:text-blue-700 md:hover:bg-transparent md:p-0  ${
-                  path == item.url ? "bg-blue-700 md:bg-transparent md:text-blue-700" : ""
+                className={`block p-2 text-gray-100 rounded md:hover:text-blue-700 md:hover:bg-transparent md:p-0 ${
+                  path == item.url
+                    ? "bg-blue-700 md:bg-transparent md:text-blue-700"
+                    : ""
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.title}
               </Link>
             ))}
+
+           
+            <li className="block md:hidden">
+              <div className="flex items-center space-x-3 rtl:space-x-reverse">
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className="px-4 py-2 w-full bg-gray-700 text-white rounded-md focus:outline-none"
+                />
+                <button className="text-white">
+                  <IoSearch size={25} />
+                </button>
+              </div>
+            </li>
           </ul>
         </div>
       </div>
