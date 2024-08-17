@@ -39,7 +39,7 @@ const QOD = () => {
         <div className="max-w-xl sm:max-w-2xl flex flex-col justify-center items-center h-full text-center mx-auto">
           <h1 className="text-3xl font-bold mb-3">Quote of the Day</h1>
           <p className="text-xl md:text-lg italic mb-4">
-            &quot;{data.quote}&quot;
+            &quot;{data?.quote}&quot;
           </p>
           <p className="text-lg md:text-md font-semibold">- {data.author}</p>
           <p className="text-md md:text-sm text-gray-400">{data.category}</p>

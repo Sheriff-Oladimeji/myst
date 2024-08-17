@@ -8,6 +8,7 @@ import { IoCopy } from "react-icons/io5";
 import html2canvas from "html2canvas";
 import { useRef } from "react";
 import { IoShareSocial } from "react-icons/io5";
+import Link from "next/link";
 
 const QuoteCard = ({ quote, author, id, category }: Quote) => {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -98,7 +99,9 @@ const QuoteCard = ({ quote, author, id, category }: Quote) => {
           <p className="mt-2 text-base font-semibold text-white leading-relaxed">
             ❝{quote}❞
           </p>
-          <p className="mt-4 text-sm text-blue-500">{author}</p>
+          <Link href={`/authors/${encodeURIComponent(author)}`}>
+            <p className="mt-4 text-sm text-blue-500">{author}</p>
+          </Link>
         </div>
       </div>
       <div
