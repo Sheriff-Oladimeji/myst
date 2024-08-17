@@ -40,9 +40,9 @@ const SearchPage = () => {
     );
 
   return (
-    <div>
-      <h2 className="text-xl font-bold text-white">
-        Search Result for {value}
+    <div className="w-[90%] mx-auto pt-12">
+      <h2 className="text-2xl font-semibold text-white mb-6">
+        Search Results for <span className="text-blue-400">{value}</span>
       </h2>
       <CardContainer>
         {data?.posts?.map((item: Quote) => (
