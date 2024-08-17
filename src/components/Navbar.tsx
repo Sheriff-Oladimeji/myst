@@ -20,16 +20,16 @@ const Navbar = () => {
 
   const handleSearch = () => {
     if (searchInput) {
-      setValue(searchInput); 
-      setIsMobileMenuOpen(false)
-      router.push("/search"); 
+      setValue(searchInput);
+      setIsMobileMenuOpen(false);
+   router.push(`/search/${encodeURIComponent(searchInput)}`);
     }
   };
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && searchInput) {
       setValue(searchInput);
       setIsMobileMenuOpen(false);
-      router.push("/search");
+     router.push(`/search/${encodeURIComponent(searchInput)}`);
     }
   };
   return (
