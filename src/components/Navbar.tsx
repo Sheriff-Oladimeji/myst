@@ -10,19 +10,27 @@ import { useRouter } from "next/navigation";
 const Navbar = () => {
   const { value, setValue } = useSearchStore();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  const [searchInput, setSearchInput] = useState<string>("");
   const path = usePathname();
-  const [searchInput , setSearchInput ] = useState<string>("")
   const router = useRouter();
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+
   const handleSearch = () => {
     if (searchInput) {
-      setValue(searchInput)
-      router.push("/search")
+      setValue(searchInput); 
+      setIsMobileMenuOpen(false)
+      router.push("/search"); 
     }
-  }
-
+  };
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter" && searchInput) {
+      setValue(searchInput);
+      router.push("/search");
+    }
+  };
   return (
     <nav className="fixed w-full z-20 top-0 start-0 border-b border-gray-500 dark:border-gray-600 bg-black">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -34,8 +42,8 @@ const Navbar = () => {
             Qlip
           </span>
         </Link>
+
         <div className="flex md:order-2 space-x-3 rtl:space-x-reverse">
-          
           <div className="hidden md:flex items-center space-x-3 rtl:space-x-reverse">
             <input
               type="text"
@@ -43,13 +51,13 @@ const Navbar = () => {
               className="px-4 py-2 w-64 bg-gray-700 text-white rounded-md focus:outline-none"
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
+              onKeyDown={handleKeyPress}
             />
             <button className="text-white" onClick={handleSearch}>
               <IoSearch size={25} />
             </button>
           </div>
 
-        
           <Link href="/new-quote">
             <button
               type="button"
@@ -60,13 +68,11 @@ const Navbar = () => {
             </button>
           </Link>
 
-          
           <button onClick={toggleMobileMenu} className="block md:hidden">
             <IoMenu size={35} />
           </button>
         </div>
 
-      
         <div
           className={`items-center justify-between w-full md:flex md:w-auto md:order-1 ${
             isMobileMenuOpen ? "block" : "hidden"
@@ -88,15 +94,16 @@ const Navbar = () => {
               </Link>
             ))}
 
-           
             <li className="block md:hidden">
               <div className="flex items-center space-x-3 rtl:space-x-reverse">
                 <input
                   type="text"
                   placeholder="Search..."
                   className="px-4 py-2 w-full bg-gray-700 text-white rounded-md focus:outline-none"
+                  onChange={(e) => setSearchInput(e.target.value)}
+                  onKeyDown={handleKeyPress}
                 />
-                <button className="text-white">
+                <button className="text-white" onClick={handleSearch}>
                   <IoSearch size={25} />
                 </button>
               </div>
