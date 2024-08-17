@@ -28,6 +28,7 @@ const Navbar = () => {
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && searchInput) {
       setValue(searchInput);
+      setIsMobileMenuOpen(false);
       router.push("/search");
     }
   };
