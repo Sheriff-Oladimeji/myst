@@ -4,14 +4,24 @@ import Link from "next/link";
 import { IoMenu, IoSearch } from "react-icons/io5";
 import { usePathname } from "next/navigation";
 import { navItems } from "@/data/navigation";
+import useSearchStore from "@/store/searchStore";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const { value, setValue } = useSearchStore();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const path = usePathname();
-
+  const [searchInput , setSearchInput ] = useState<string>("")
+  const router = useRouter();
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+  const handleSearch = () => {
+    if (searchInput) {
+      setValue(searchInput)
+      router.push("/search")
+    }
+  }
 
   return (
     <nav className="fixed w-full z-20 top-0 start-0 border-b border-gray-500 dark:border-gray-600 bg-black">
@@ -31,8 +41,10 @@ const Navbar = () => {
               type="text"
               placeholder="Search..."
               className="px-4 py-2 w-64 bg-gray-700 text-white rounded-md focus:outline-none"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
             />
-            <button className="text-white">
+            <button className="text-white" onClick={handleSearch}>
               <IoSearch size={25} />
             </button>
           </div>

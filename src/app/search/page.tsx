@@ -33,7 +33,8 @@ const {value, setValue} = useSearchStore()
      </p>
    );
   return (
-    <div>
+      <div>
+          <h2 className="text-xl font-bold text-white">Search Result for {value}</h2>
       <CardContainer>
         {data?.posts?.map((item: Quote) => (
           <QuoteCard
