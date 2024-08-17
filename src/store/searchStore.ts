@@ -10,3 +10,6 @@ const useSearchStore = create<SearchState>()((set) => ({
     setValue: (newValue: string) => set({value: newValue}) 
 
 }));
+
+
+export default useSearchStore
