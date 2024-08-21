@@ -147,102 +147,112 @@ const AddQuote = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex flex-col gap-4 max-w-sm mx-auto pt-12 pb-8 w-[90%] "
-    >
-      <div>
-        <label
-          htmlFor="quote"
-          className="block mb-2 text-sm font-bold text-white"
-        >
-          Quote
-        </label>
-        <textarea
-          name="quote"
-          id=""
-          placeholder="Enter quote"
-          rows={3}
-          className="block w-full p-3 border border-gray-500 text-base  rounded-[8px] bg-gray-700 placeholder-gray-400 text-white  focus:outline-none "
-          value={quote}
-          onChange={(e) => setQuote(e.target.value)}
-        ></textarea>
-      </div>
-      <div>
-        <label
-          htmlFor="author"
-          className="block mb-2 text-sm font-medium text-white"
-        >
-          Quote Author
-        </label>
-        <input
-          type="text"
-          name="author"
-          placeholder="Enter author"
-          className="block w-full p-3  border border-gray-500 text-base  rounded-[8px] bg-gray-700 placeholder-gray-400 text-white  focus:outline-none "
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-        />
-      </div>
-      <div>
-        <label
-          htmlFor="category"
-          className="block mb-2 text-sm font-medium text-white"
-        >
-          Category
-        </label>
-        <select
-          name="category"
-          className="block w-full p-3  border border-gray-500 text-base  rounded-[8px] bg-gray-700 placeholder-gray-400 text-white  focus:outline-none "
-          value={category}
-          onChange={handleCategoryChange}
-        >
-          <option value="">Select a category</option>
-          {popularCategories.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}
-            </option>
-          ))}
-          <option value="new">Add new category</option>
-        </select>
-      </div>
-      {category === "new" && (
+    <div className="max-w-lg mx-auto px-4 py-8">
+      {/* Header Section */}
+      <header className="text-center mb-8">
+        <h1 className="text-3xl font-bold text-white">Add a New Quote</h1>
+        <p className="text-sm text-gray-300 mt-2">
+          Share your favorite quote with the community.
+        </p>
+      </header>
+
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 bg-gray-800 p-6 rounded-lg shadow-lg"
+      >
         <div>
           <label
-            htmlFor="newCategory"
+            htmlFor="quote"
+            className="block mb-2 text-sm font-bold text-white"
+          >
+            Quote
+          </label>
+          <textarea
+            name="quote"
+            id="quote"
+            placeholder="Enter quote"
+            rows={3}
+            className="block w-full p-3 border border-gray-500 text-base rounded-lg bg-gray-700 placeholder-gray-400 text-white focus:outline-none"
+            value={quote}
+            onChange={(e) => setQuote(e.target.value)}
+          ></textarea>
+        </div>
+        <div>
+          <label
+            htmlFor="author"
             className="block mb-2 text-sm font-medium text-white"
           >
-            New Category
+            Quote Author
           </label>
           <input
             type="text"
-            name="newCategory"
-            placeholder="Enter new category"
-            className="block w-full p-3  border border-gray-500 text-base  rounded-[8px] bg-gray-700 placeholder-gray-400 text-white  focus:outline-none"
-            value={newCategory}
-            onChange={(e) => setNewCategory(e.target.value)}
+            name="author"
+            placeholder="Enter author"
+            className="block w-full p-3 border border-gray-500 text-base rounded-lg bg-gray-700 placeholder-gray-400 text-white focus:outline-none"
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
           />
         </div>
-      )}
-      {isLoading ? (
-        <button
-          type="button"
-          className="bg-indigo-500 font-medium rounded-[7px] text-sm px-4 py-2.5 text-center w-max flex items-center gap-2  "
-          disabled
-        >
-          <div className="border-gray-300 h-6 w-6 animate-spin rounded-full border-4 border-t-blue-600" />
-          Processing...
-        </button>
-      ) : (
-        <button
-          type="submit"
-          className={`text-white focus:outline-none font-medium rounded-[7px] text-sm px-6 py-2.5 text-center w-max  bg-blue-700`}
-        >
-          Submit
-        </button>
-      )}
-      <ToastContainer />
-    </form>
+        <div>
+          <label
+            htmlFor="category"
+            className="block mb-2 text-sm font-medium text-white"
+          >
+            Category
+          </label>
+          <select
+            name="category"
+            className="block w-full p-3 border border-gray-500 text-base rounded-lg bg-gray-700 placeholder-gray-400 text-white focus:outline-none"
+            value={category}
+            onChange={handleCategoryChange}
+          >
+            <option value="">Select a category</option>
+            {popularCategories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+            <option value="new">Add new category</option>
+          </select>
+        </div>
+        {category === "new" && (
+          <div>
+            <label
+              htmlFor="newCategory"
+              className="block mb-2 text-sm font-medium text-white"
+            >
+              New Category
+            </label>
+            <input
+              type="text"
+              name="newCategory"
+              placeholder="Enter new category"
+              className="block w-full p-3 border border-gray-500 text-base rounded-lg bg-gray-700 placeholder-gray-400 text-white focus:outline-none"
+              value={newCategory}
+              onChange={(e) => setNewCategory(e.target.value)}
+            />
+          </div>
+        )}
+        {isLoading ? (
+          <button
+            type="button"
+            className="bg-indigo-500 font-medium rounded-lg text-sm px-4 py-2.5 text-center flex items-center gap-2 w-full  justify-center "
+            disabled
+          >
+            <div className="border-gray-300 h-6 w-6 animate-spin rounded-full border-4 border-t-blue-600" />
+            <p className="text-center"> Processing...</p>
+          </button>
+        ) : (
+          <button
+            type="submit"
+            className={`text-white focus:outline-none font-medium rounded-lg text-sm px-6 py-2.5 text-center w-full bg-blue-700`}
+          >
+            Submit
+          </button>
+        )}
+        <ToastContainer />
+      </form>
+    </div>
   );
 };
 
