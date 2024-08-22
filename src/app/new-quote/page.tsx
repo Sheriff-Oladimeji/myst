@@ -148,7 +148,7 @@ const AddQuote = () => {
 
   return (
     <div className="max-w-lg mx-auto px-4 py-8">
-      {/* Header Section */}
+      
       <header className="text-center mb-8">
         <h1 className="text-3xl font-bold text-white">Add a New Quote</h1>
         <p className="text-sm text-gray-300 mt-2">
