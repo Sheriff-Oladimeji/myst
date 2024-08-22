@@ -233,13 +233,13 @@ const AddQuote = () => {
             value={category}
             onChange={handleCategoryChange}
           >
+            <option value="new">Add new category</option>
             <option value="">Select a category</option>
             {data?.map(({ _id: id, count }) => (
               <option key={id} value={id}>
                 {id}
               </option>
             ))}
-            <option value="new">Add new category</option>
           </select>
         </div>
         {category === "new" && (
