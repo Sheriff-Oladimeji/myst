@@ -4,6 +4,8 @@ import { Bounce, ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
+import Loader from "@/components/Loader";
 
 const showWarning = (message: string) => {
   return toast.error(message, {
@@ -42,15 +44,41 @@ const prohibitedWords = [
   "twat",
   "wanker",
 ];
+type Category = {
+  _id: string;
+  count: number;
+};
 
 const AddQuote = () => {
   const router = useRouter();
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
   const [quote, setQuote] = useState<string>("");
   const [author, setAuthor] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [newCategory, setNewCategory] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { isPending, error, data } = useQuery<Category[]>({
+    queryKey: ["categories"],
+    queryFn: () =>
+      fetch(`${baseUrl}/quotes/categories`).then((res) => {
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return res.json();
+      }),
+  });
 
+   if (isPending) {
+     return <Loader/>;
+   }
+
+   if (error) {
+     return (
+       <p className="text-red-500 text-xl">
+         An error has occurred: {(error as Error).message}
+       </p>
+     );
+   }
   const popularCategories = [
     "Inspirational",
     "Motivational",
@@ -148,7 +176,6 @@ const AddQuote = () => {
 
   return (
     <div className="max-w-lg mx-auto px-4 py-8">
-      
       <header className="text-center mb-8">
         <h1 className="text-3xl font-bold text-white">Add a New Quote</h1>
         <p className="text-sm text-gray-300 mt-2">
@@ -207,9 +234,9 @@ const AddQuote = () => {
             onChange={handleCategoryChange}
           >
             <option value="">Select a category</option>
-            {popularCategories.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
+            {data?.map(({ _id: id, count }) => (
+              <option key={id} value={id}>
+                {id}
               </option>
             ))}
             <option value="new">Add new category</option>
