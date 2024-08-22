@@ -1,7 +1,7 @@
 "use client";
 import { FormEvent, useState, ChangeEvent } from "react";
 import { Bounce, ToastContainer, toast } from "react-toastify";
-
+import prohibitedWords from "@/data/prohibited";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
@@ -21,29 +21,7 @@ const showWarning = (message: string) => {
   });
 };
 
-const prohibitedWords = [
-  "dick",
-  "gay",
-  "shit",
-  "fuck",
-  "bitch",
-  "asshole",
-  "bastard",
-  "cunt",
-  "slut",
-  "faggot",
-  "nigger",
-  "whore",
-  "pussy",
-  "cock",
-  "damn",
-  "crap",
-  "douchebag",
-  "motherfucker",
-  "retard",
-  "twat",
-  "wanker",
-];
+
 type Category = {
   _id: string;
   count: number;
@@ -68,27 +46,17 @@ const AddQuote = () => {
       }),
   });
 
-   if (isPending) {
-     return <Loader/>;
-   }
+  if (isPending) {
+    return <Loader />;
+  }
 
-   if (error) {
-     return (
-       <p className="text-red-500 text-xl">
-         An error has occurred: {(error as Error).message}
-       </p>
-     );
-   }
-  const popularCategories = [
-    "Inspirational",
-    "Motivational",
-    "Love",
-    "Life",
-    "Success",
-    "Happiness",
-    "Wisdom",
-    "Friendship",
-  ];
+  if (error) {
+    return (
+      <p className="text-red-500 text-xl">
+        An error has occurred: {(error as Error).message}
+      </p>
+    );
+  }
 
   const handleCategoryChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setCategory(e.target.value);
