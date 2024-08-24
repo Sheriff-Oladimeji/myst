@@ -91,6 +91,13 @@ const AddQuote = () => {
         body: JSON.stringify(data),
       });
 
+      if (res.status === 409) {
+        // Quote already exists
+        showWarning("This quote already exists in the database.");
+        setIsLoading(false);
+        return;
+      }
+
       if (!res.ok) {
         const errorText = await res.text();
         throw new Error(
