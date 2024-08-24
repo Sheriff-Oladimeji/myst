@@ -20,6 +20,8 @@ const prohibitedWords = [
   "retard",
   "twat",
   "wanker",
+  "olosho",
+  "konji"
 ];
 
 export default prohibitedWords
