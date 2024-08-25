@@ -11,8 +11,8 @@ import { useParams } from "next/navigation";
 
 const SearchPage = () => {
   const { value } = useSearchStore();
-  const { value: searchTerm } = useParams<{ value: string }>(); 
-
+const { value: encodedSearchTerm } = useParams<{ value: string }>();
+const searchTerm = decodeURIComponent(encodedSearchTerm);
   const [page, setPage] = useState(1);
   const limit = 30;
 
