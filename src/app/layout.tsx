@@ -5,10 +5,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import QueryProvider from "@/components/QueryProvider";
 import { Analytics } from "@vercel/analytics/react";
-
+import Head from "next/head";
 const inter = Inter({ subsets: ["latin"] });
 
-export const runtime = 'edge' 
+export const runtime = "edge";
 export const metadata: Metadata = {
   title: {
     default: "Qlip -  Explore, Create, and Share Inspirational Quotes",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     "share quotes",
     "motivational quotes",
     "free quotes",
-    "quotes website"
+    "quotes website",
   ],
   authors: [{ name: "Sheriff Oladimeji" }],
   creator: "Sheriff Oladimeji",
@@ -67,6 +67,15 @@ export default function RootLayout({
   return (
     <QueryProvider>
       <html lang="en">
+        <Head>
+          <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6855656947142398"
+            crossOrigin="anonymous"
+          ></script>
+          <meta name="google-adsense-account" content="ca-pub-6855656947142398"></meta>
+        </Head>
+
         <body
           className={`w-full min-h-screen m-0 flex flex-col justify-between text-white bg-black`}
         >
@@ -81,4 +90,4 @@ export default function RootLayout({
     </QueryProvider>
   );
 }
-``
+``;
