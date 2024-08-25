@@ -41,8 +41,8 @@ const QOD = () => {
           <p className="text-xl md:text-lg italic mb-4">
             &quot;{data?.quote}&quot;
           </p>
-          <p className="text-lg md:text-md font-semibold">- {data.author}</p>
-          <p className="text-md md:text-sm text-gray-400">{data.category}</p>
+          <p className="text-lg md:text-md font-semibold">- {data?.author}</p>
+          <p className="text-md md:text-sm text-gray-400">{data?.category}</p>
         </div>
       </div>
     </header>
