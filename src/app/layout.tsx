@@ -10,9 +10,53 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const runtime = 'edge' 
 export const metadata: Metadata = {
-  title: "Qlip",
+  title: {
+    default: "Qlip -  Explore, Create, and Share Inspirational Quotes",
+    template: "%s | Qlip",
+  },
   description:
-    "Qlip is an online quotes archive - Discover, share, and create inspiring quotes with ease.",
+    "Discover, share, and create inspiring quotes with ease on Qlip, your go-to quotes platform.",
+  keywords: [
+    "quotes",
+    "inspirational quotes",
+    "quote archive",
+    "share quotes",
+    "motivational quotes",
+    "free quotes",
+    "quotes website"
+  ],
+  authors: [{ name: "Sheriff Oladimeji" }],
+  creator: "Sheriff Oladimeji",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://qlip.vercel.app/",
+    siteName: "Qlip",
+    images: [
+      {
+        url: "https://www.yourwebsite.com/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Qlip - Your Interactive Quote Platform",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@dimeji_dev",
+    creator: "@dimeji_dev",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({
