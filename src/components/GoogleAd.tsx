@@ -17,7 +17,7 @@ const GoogleAd: React.FC<GoogleAdProps> = ({ adSlot }) => {
 
   return (
     <div
-      style={{ display: "flex", justifyContent: "center", margin: "20px 0" }}
+      
     >
       <ins
         className="adsbygoogle"

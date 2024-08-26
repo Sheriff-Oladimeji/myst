@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://qlip.vercel.app/sitemap.xml

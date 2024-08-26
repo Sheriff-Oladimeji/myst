@@ -68,12 +68,13 @@ export default function RootLayout({
     <QueryProvider>
       <html lang="en">
         <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+
           <script
             async
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6855656947142398"
             crossOrigin="anonymous"
           ></script>
-          <meta name="google-adsense-account" content="ca-pub-6855656947142398"></meta>
         </Head>
 
         <body
