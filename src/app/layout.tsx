@@ -68,7 +68,6 @@ export default function RootLayout({
     <QueryProvider>
       <html lang="en">
         <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta
             name="google-site-verification"
             content="sVr1fNY12PJP5g7RHtTLJ-AVV77TWGyb7Q-fWgw5LqU"
