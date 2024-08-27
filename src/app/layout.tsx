@@ -68,7 +68,10 @@ export default function RootLayout({
     <QueryProvider>
       <html lang="en">
         <Head>
-        
+          <meta
+            name="google-site-verification"
+            content="sVr1fNY12PJP5g7RHtTLJ-AVV77TWGyb7Q-fWgw5LqU"
+          />
           <script
             async
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6855656947142398"
