@@ -52,8 +52,7 @@ const Category = ({ params }: { params: { id: string } }) => {
           {params.id} Quotes
         </h1>
         <p className="mt-4 text-lg text-gray-400">
-          Dive into a curated collection of {params.id}
-          quotes that inspire, motivate, and enlighten.
+          Dive into a curated collection of {params.id} quotes that inspire, motivate, and enlighten.
         </p>
         <div className="border-b border-gray-700 mt-6 mb-8"></div>
       </header>

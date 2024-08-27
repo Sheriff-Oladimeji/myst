@@ -99,14 +99,7 @@ const searchTerm = decodeURIComponent(encodedSearchTerm);
         totalPages={data?.totalPages}
         onPageChange={handlePageChange}
       />
-      <div className="mt-10 flex justify-center">
-        <button
-          className="bg-blue-500 text-white px-6 py-2 rounded-lg shadow-lg hover:bg-blue-400 transition duration-300"
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        >
-          Back to Top
-        </button>
-      </div>
+     
     </div>
   );
 };
