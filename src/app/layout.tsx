@@ -5,10 +5,12 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import QueryProvider from "@/components/QueryProvider";
 import { Analytics } from "@vercel/analytics/react";
-import Head from "next/head";
+import Script from "next/script";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const runtime = "edge";
+
 export const metadata: Metadata = {
   title: {
     default: "Qlip -  Explore, Create, and Share Inspirational Quotes",
@@ -57,6 +59,15 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  verification: {
+    google: "sVr1fNY12PJP5g7RHtTLJ-AVV77TWGyb7Q-fWgw5LqU",
+  },
+  alternates: {
+    canonical: "https://qlip.vercel.app/",
+  },
+  other: {
+    "theme-color": "#000000",
+  },
 };
 
 export default function RootLayout({
@@ -67,25 +78,39 @@ export default function RootLayout({
   return (
     <QueryProvider>
       <html lang="en">
-        <Head>
-          <meta
-            name="google-site-verification"
-            content="sVr1fNY12PJP5g7RHtTLJ-AVV77TWGyb7Q-fWgw5LqU"
-          />
-          <script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6855656947142398"
-            crossOrigin="anonymous"
-          ></script>
-        </Head>
-
         <body
           className={`w-full min-h-screen m-0 flex flex-col justify-between text-white bg-black`}
         >
+          <Script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6855656947142398"
+            crossOrigin="anonymous"
+          />
+          <Script id="schema-org" type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              url: "https://qlip.vercel.app/",
+              name: "Qlip",
+              author: {
+                "@type": "Person",
+                name: "Sheriff Oladimeji",
+              },
+              description:
+                "Discover, share, and create inspiring quotes with ease on Qlip, your go-to quotes platform.",
+              publisher: {
+                "@type": "Organization",
+                name: "Qlip",
+              },
+              potentialAction: {
+                "@type": "SearchAction",
+                target: "https://qlip.vercel.app/search?q={search_term_string}",
+                "query-input": "required name=search_term_string",
+              },
+            })}
+          </Script>
           <Navbar />
-
           <div className="pt-20 pb-8">{children}</div>
-
           <Footer />
           <Analytics />
         </body>
@@ -93,4 +118,3 @@ export default function RootLayout({
     </QueryProvider>
   );
 }
-``;
