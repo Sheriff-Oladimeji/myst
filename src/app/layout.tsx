@@ -81,11 +81,11 @@ export default function RootLayout({
         <body
           className={`w-full min-h-screen m-0 flex flex-col justify-between text-white bg-black`}
         >
-          <Script
+          {/* <Script
             async
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6855656947142398"
             crossOrigin="anonymous"
-          />
+          /> */}
           <Script id="schema-org" type="application/ld+json">
             {JSON.stringify({
               "@context": "https://schema.org",
