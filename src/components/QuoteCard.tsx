@@ -100,7 +100,7 @@ const QuoteCard = ({ quote, author, id, category }: Quote) => {
             ❝{quote}❞
           </p>
           <Link href={`/authors/${encodeURIComponent(author)}`}>
-            <p className="mt-4 text-sm text-blue-500">{author}</p>
+            <p className="mt-4 text-sm text-blue-500 capitalize">{author}</p>
           </Link>
         </div>
       </div>
