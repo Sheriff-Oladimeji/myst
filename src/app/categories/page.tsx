@@ -1,15 +1,13 @@
 import AllCategories from "@/components/AllCategories";
-import React from "react";
 
 const Categories = () => {
   return (
-    <main>
-      <section className="text-center">
-        <h2 className="text-xl font-semibold text-white mb-2">
+    <main className="container mx-auto px-4">
+      <section className="text-center mb-8">
+        <h2 className="text-2xl font-bold text-white mb-4">
           Discover All Quote Categories
         </h2>
-      
-        <div className="border-b border-gray-700 mb-8"></div>
+        <div className="border-b border-gray-700"></div>
       </section>
       <AllCategories />
     </main>
