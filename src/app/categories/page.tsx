@@ -1,5 +1,5 @@
 import AllCategories from "@/components/AllCategories";
-
+import React from "react";
 const Categories = () => {
   return (
     <main className="container mx-auto px-4">

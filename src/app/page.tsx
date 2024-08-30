@@ -9,7 +9,7 @@ export default function Home() {
     <main>
 
       <QOD />
-      <GoogleAd adSlot="f08c47fec0942fa0" />
+      {/* <GoogleAd adSlot="f08c47fec0942fa0" /> */}
       <AllQuotes />
     </main>
   );
