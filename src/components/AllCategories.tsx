@@ -53,7 +53,7 @@ const AllCategories = () => {
             href={`/categories/${id}`}
             className="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition-colors duration-200"
           >
-            <p className="text-lg font-medium text-blue-400">{id}</p>
+            <p className="text-base  sm:text-lg font-medium text-blue-400">{id}</p>
             <p className="text-sm text-gray-400">{count} quotes</p>
           </Link>
         ))}
