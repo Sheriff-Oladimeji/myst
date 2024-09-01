@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import QueryProvider from "@/components/QueryProvider";
 import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -113,6 +114,7 @@ export default function RootLayout({
           <div className="pt-20 pb-8">{children}</div>
           <Footer />
           <Analytics />
+          <SpeedInsights/>
         </body>
       </html>
     </QueryProvider>
