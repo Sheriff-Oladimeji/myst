@@ -9,11 +9,14 @@ import html2canvas from "html2canvas";
 import { useRef } from "react";
 import { IoShareSocial } from "react-icons/io5";
 import Link from "next/link";
+import { useState } from "react";
+import { FaTwitter, FaFacebook, FaInstagram } from "react-icons/fa";
 
 const QuoteCard = ({ quote, author, id, category }: Quote) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
-    
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const handleCopy = (text: string) => {
     navigator.clipboard
       .writeText(`❝${text}❞`)
@@ -38,18 +41,16 @@ const QuoteCard = ({ quote, author, id, category }: Quote) => {
   const handleDownload = async () => {
     if (!cardRef.current || !buttonsRef.current) return;
 
-    
     buttonsRef.current.style.display = "none";
 
     try {
-      
       const canvas = await html2canvas(cardRef.current);
       const dataUrl = canvas.toDataURL("image/png");
       const link = document.createElement("a");
 
       const fileName = id
         ? `quote-${id}.png`
-        : `quote-${new Date().getTime()}.png`; 
+        : `quote-${new Date().getTime()}.png`;
 
       link.href = dataUrl;
       link.download = fileName;
@@ -57,35 +58,33 @@ const QuoteCard = ({ quote, author, id, category }: Quote) => {
     } catch (error) {
       console.error("Failed to download the quote image: ", error);
     } finally {
-      
       buttonsRef.current.style.display = "flex";
     }
   };
 
-    const handleShare = async () => {
+  const handleShare = () => {
+    if (navigator.share) {
       const shareData = {
         title: "Check out this quote",
         text: `"${quote}" - ${author}`,
-        url: window.location.href, 
+        url: window.location.href,
       };
 
-      if (navigator.share) {
-        try {
-          await navigator.share(shareData);
-          toast("Quote shared successfully!", {
-            
-          });
-        } catch (err) {
-          console.error("Error sharing:", err);
-          toast("Failed to share quote. Try copying instead.", {
-            
-            theme: "dark",
-          });
-        }
-      } else {
-      toast("Sharing is not supported on desktop")
-      }
-    };
+      navigator.share(shareData).catch((err) => {
+        console.error("Error sharing:", err);
+        toast("Failed to share quote. Try copying instead.", {
+          theme: "dark",
+        });
+      });
+    } else {
+      setIsModalOpen(true);
+    }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div
       ref={cardRef}
@@ -128,6 +127,52 @@ const QuoteCard = ({ quote, author, id, category }: Quote) => {
         </button>
       </div>
       <ToastContainer />
+
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h2 className="text-lg font-semibold mb-4">Share this quote</h2>
+            <div className="flex space-x-4">
+              <a
+                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                  `"${quote}" - ${author} ${window.location.href}`
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500"
+              >
+                <FaTwitter size={24} />
+              </a>
+              <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                  window.location.href
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-700"
+              >
+                <FaFacebook size={24} />
+              </a>
+              <a
+                href={`https://www.instagram.com/?url=${encodeURIComponent(
+                  window.location.href
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-pink-500"
+              >
+                <FaInstagram size={24} />
+              </a>
+            </div>
+            <button
+              onClick={closeModal}
+              className="mt-4 text-gray-500 hover:text-gray-700"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
