@@ -30,7 +30,6 @@ const GoogleAd: React.FC<GoogleAdProps> = ({ adSlot, adClient = "ca-pub-68556569
     <div>
       <ins
         className="adsbygoogle"
-        style={{ display: "block" }}
         data-ad-client={adClient}
         data-ad-slot={adSlot}
         data-ad-format="auto"
