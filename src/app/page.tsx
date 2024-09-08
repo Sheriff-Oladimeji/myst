@@ -1,4 +1,3 @@
-
 import GoogleAd from "@/components/GoogleAd";
 import AllQuotes from "@/components/AllQuotes";
 import QOD from "@/components/QOD";
